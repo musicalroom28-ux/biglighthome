@@ -141,12 +141,6 @@
                             </a>
                         </div>
 
-                        <!-- JSON Guide Modal Button -->
-                        <div class="pt-2">
-                            <button id="open-json-guide" class="text-xs text-slate-500 hover:text-slate-300 underline flex items-center gap-1 mx-auto md:mx-0">
-                                <i class="fa-solid fa-code"></i> JSON 파일 분리 및 수정 가이드 보기
-                            </button>
-                        </div>
                     </div>
 
                     <!-- Profile Image (Placeholder Structure) -->
@@ -386,67 +380,6 @@
             <p class="text-slate-500">Stage Lighting & Technical Directing Portfolio</p>
         </div>
     </footer>
-
-    <div id="json-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden flex flex-col shadow-2xl">
-            <div class="p-5 border-b border-slate-100 flex items-center justify-between">
-                <h3 class="font-bold text-slate-900 text-lg flex items-center gap-2">
-                    <i class="fa-solid fa-file-code text-brand-600"></i> JSON 파일 관리 가이드
-                </h3>
-                <button id="close-json-modal" class="text-slate-400 hover:text-slate-600 p-1">
-                    <i class="fa-solid fa-xmark text-xl"></i>
-                </button>
-            </div>
-            <div class="p-6 overflow-y-auto space-y-6 text-sm text-slate-600">
-                <p>웹사이트와 같은 폴더 위치에 아래 파일명으로 JSON을 생성하시면, 코드를 수정할 필요 없이 내용이 자동으로 업데이트됩니다.</p>
-                
-                <div>
-                    <h4 class="font-bold text-slate-900 mb-1">1. works.json (작품 목록)</h4>
-                    <pre class="bg-slate-900 text-slate-200 p-3 rounded-lg text-xs font-mono overflow-x-auto">
-[
-  {
-    "id": 1,
-    "title": "2026 미디어아트 페스티벌 키비주얼",
-    "description": "빛과 파동을 모티브로 제작된 페스티벌 메인 브랜드 이미지",
-    "date": "2026.04",
-    "image": "assets/work1.jpg",
-    "url": "https://example.com/work1",
-    "category": "Graphic Design"
-  }
-]</pre>
-                </div>
-
-                <div>
-                    <h4 class="font-bold text-slate-900 mb-1">2. history.json (공연/축제 이력)</h4>
-                    <pre class="bg-slate-900 text-slate-200 p-3 rounded-lg text-xs font-mono overflow-x-auto">
-[
-  {
-    "year": "2026",
-    "event": "서울 라이트 페스티벌",
-    "role": "미디어 파사드 메인 디렉터",
-    "description": "DDP 외벽 미디어 파사드 영상 연출 및 총괄 기획"
-  }
-]</pre>
-                </div>
-
-                <div>
-                    <h4 class="font-bold text-slate-900 mb-1">3. programs.json (제작 프로그램)</h4>
-                    <pre class="bg-slate-900 text-slate-200 p-3 rounded-lg text-xs font-mono overflow-x-auto">
-[
-  {
-    "title": "Color Palette Generator Tool",
-    "description": "이미지에서 주요 색상 파렛트를 자동 추출해주는 미니 유틸리티",
-    "screenshot": "assets/prog1.jpg",
-    "url": "https://github.com/example/tool"
-  }
-]</pre>
-                </div>
-            </div>
-            <div class="p-4 border-t border-slate-100 bg-slate-50 text-right">
-                <button id="modal-ok-btn" class="px-5 py-2 bg-slate-900 text-white rounded-lg text-xs font-medium hover:bg-brand-600 transition-colors">확인</button>
-            </div>
-        </div>
-    </div>
 
     <script>
         /* Sample fallback data embedded for offline preview or missing JSON files */
@@ -770,24 +703,6 @@
             }, observerOptions);
 
             fadeSections.forEach(section => observer.observe(section));
-
-            // JSON Guide Modal Handlers
-            const modal = document.getElementById('json-modal');
-            const openBtn = document.getElementById('open-json-guide');
-            const closeBtn = document.getElementById('close-json-modal');
-            const okBtn = document.getElementById('modal-ok-btn');
-
-            const toggleModal = (show) => {
-                if (show) modal.classList.remove('hidden');
-                else modal.classList.add('hidden');
-            };
-
-            openBtn.addEventListener('click', () => toggleModal(true));
-            closeBtn.addEventListener('click', () => toggleModal(false));
-            okBtn.addEventListener('click', () => toggleModal(false));
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) toggleModal(false);
-            });
         });
     </script>
 </body>
