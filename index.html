@@ -79,7 +79,7 @@
                 <a href="#profile" class="hover:text-brand-500 transition-colors">소개 & 경력</a>
                 <a href="#works" class="hover:text-brand-500 transition-colors">작품 목록</a>
                 <a href="#history" class="hover:text-brand-500 transition-colors">공연/축제 이력</a>
-                <a href="#programs" class="hover:text-brand-500 transition-colors">프로그램/유틸리티</a>
+                <a href="#programs" class="hover:text-brand-500 transition-colors">조명프로그램</a>
                 <a href="#estimate" class="hover:text-brand-500 transition-colors">견적 안내</a>
                 <a href="#contact" class="hover:text-brand-500 transition-colors px-3 py-1.5 rounded-full bg-brand-600 text-white hover:bg-brand-700 transition-all shadow-sm">문의하기</a>
             </nav>
@@ -102,7 +102,7 @@
             <a href="#profile" class="mobile-link block text-slate-300 font-medium py-2">소개</a>
             <a href="#works" class="mobile-link block text-slate-300 font-medium py-2">작품</a>
             <a href="#history" class="mobile-link block text-slate-300 font-medium py-2">공연/이력</a>
-            <a href="#programs" class="mobile-link block text-slate-300 font-medium py-2">프로그램</a>
+            <a href="#programs" class="mobile-link block text-slate-300 font-medium py-2">조명프로그램</a>
             <a href="#estimate" class="mobile-link block text-slate-300 font-medium py-2">견적 안내</a>
             <a href="#contact" class="mobile-link block text-slate-300 font-medium py-2 text-brand-500 font-semibold">문의하기</a>
         </div>
@@ -210,7 +210,7 @@
         <section id="programs" class="fade-in-section py-20 bg-slate-900 text-white border-t border-slate-800">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-xl mx-auto mb-16">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">제작한 프로그램 & 툴</h2>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">조명프로그램</h2>
                     <p class="text-slate-400 mt-2 text-sm sm:text-base">효율적인 그래픽 작업과 연출을 위해 직접 제작한 유틸리티입니다.</p>
                     <div class="flex items-center justify-center space-x-4 mt-4">
                         <a href="mailto:musicalroom@kakao.com" id="email-contact-link-programs" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="이메일 문의" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>musicalroom@kakao.com</span>';">
@@ -233,7 +233,7 @@
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-12">
                     <span class="text-brand-500 font-medium text-xs tracking-widest uppercase mb-2 block">Estimate Guide</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">무대 조명 디자인 및 기술감독 견적 안내</h2>
+                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">무대조명디자인 견적 안내</h2>
                     <p class="text-slate-400 mt-2 text-sm sm:text-base">공연 규모 및 기간, 현장 셋업 조건에 따른 외주 디자인 참고 가격입니다.</p>
                     <div class="flex items-center justify-center space-x-4 mt-4">
                         <a href="mailto:musicalroom@kakao.com" id="email-contact-link-estimate" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="이메일 문의" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>musicalroom@kakao.com</span>';">
@@ -245,93 +245,59 @@
                     </div>
                 </div>
 
-                <!-- Price Table (Desktop) -->
-                <div class="hidden sm:block overflow-x-auto bg-slate-800/80 rounded-xl border border-slate-700/80 shadow-xl mb-6">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="border-b border-slate-700 bg-slate-800 text-xs uppercase tracking-wider text-slate-300">
-                                <th class="py-4 px-6 font-semibold">작업 종류</th>
-                                <th class="py-4 px-6 font-semibold">예상 소요기간</th>
-                                <th class="py-4 px-6 font-semibold">가격 범위</th>
-                                <th class="py-4 px-6 font-semibold">참고사항</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-700/60 text-sm text-slate-300">
-                            <tr class="hover:bg-slate-800/50 transition-colors">
-                                <td class="py-4 px-6 font-medium text-white">소극장 연극 / 무용 조명디자인</td>
-                                <td class="py-4 px-6">1 ~ 2주</td>
-                                <td class="py-4 px-6 font-semibold text-brand-400">150만원 ~</td>
-                                <td class="py-4 px-6 text-slate-400 text-xs">조명 플롯 제작, 반입 및 메모리얼 메모리얼 셋업 포함</td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/50 transition-colors">
-                                <td class="py-4 px-6 font-medium text-white">중·대극장 공연 / 뮤지컬 / 전통무용</td>
-                                <td class="py-4 px-6">2 ~ 4주</td>
-                                <td class="py-4 px-6 font-semibold text-brand-400">300만원 ~</td>
-                                <td class="py-4 px-6 text-slate-400 text-xs">무대조명 디자인, 특수효과 및 드라이런 총괄</td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/50 transition-colors">
-                                <td class="py-4 px-6 font-medium text-white">축제 / 야외 행사 라이팅 디렉팅</td>
-                                <td class="py-4 px-6">1 ~ 3주</td>
-                                <td class="py-4 px-6 font-semibold text-brand-400">상세 협의</td>
-                                <td class="py-4 px-6 text-slate-400 text-xs">현장 프로젝션 및 야외 무대 셋업 시스템 구축</td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/50 transition-colors">
-                                <td class="py-4 px-6 font-medium text-white">무대 기술감독 / 조명 컨설팅</td>
-                                <td class="py-4 px-6">프로젝트별</td>
-                                <td class="py-4 px-6 font-semibold text-brand-400">상세 협의</td>
-                                <td class="py-4 px-6 text-slate-400 text-xs">공연장 무대 안전 관리, 조명장비 세팅 및 운영 감리</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <!-- Estimate Table -->
+                <h3 class="text-center text-sm font-semibold text-slate-300 mb-6">무대조명디자인 견적 예시</h3>
+                <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 shadow-xl overflow-hidden mb-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-700 bg-slate-800 text-xs uppercase tracking-wider text-slate-300">
+                                    <th class="py-3 px-4 font-semibold">공연 장르</th>
+                                    <th class="py-3 px-4 font-semibold text-right">500석 이하</th>
+                                    <th class="py-3 px-4 font-semibold text-right">500석~800석</th>
+                                    <th class="py-3 px-4 font-semibold text-right">1000석 이상</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-700/60 text-slate-300">
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">연극</td><td class="py-2.5 px-4 text-right">500,000원</td><td class="py-2.5 px-4 text-right">800,000원</td><td class="py-2.5 px-4 text-right">1,000,000원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">무용</td><td class="py-2.5 px-4 text-right">700,000원</td><td class="py-2.5 px-4 text-right">1,000,000원</td><td class="py-2.5 px-4 text-right">1,500,000원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">콘서트</td><td class="py-2.5 px-4 text-right">700,000원</td><td class="py-2.5 px-4 text-right">1,000,000원</td><td class="py-2.5 px-4 text-right">1,500,000원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">뮤지컬</td><td class="py-2.5 px-4 text-right">700,000원</td><td class="py-2.5 px-4 text-right">1,000,000원</td><td class="py-2.5 px-4 text-right">1,500,000원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">기타 공연 및 행사</td><td class="py-2.5 px-4 text-right">500,000원</td><td class="py-2.5 px-4 text-right">800,000원</td><td class="py-2.5 px-4 text-right">1,000,000원</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-yellow-400 italic px-6 py-3">※ 조명 장비 대여비, 트러스/리깅, 교통비, 숙박비, 식대 등은 별도 협의 (상기 가격 미포함)</p>
                 </div>
 
-                <!-- Price Cards (Mobile) -->
-                <div class="sm:hidden space-y-3 mb-6">
-                    <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 shadow-xl p-4">
-                        <div class="flex items-center justify-between gap-2 mb-2">
-                            <h3 class="font-bold text-white text-sm">소극장 연극 / 무용 조명디자인</h3>
-                            <span class="font-semibold text-brand-400 text-sm whitespace-nowrap">150만원 ~</span>
-                        </div>
-                        <p class="text-xs text-slate-400 mb-1">예상 소요기간: 1 ~ 2주</p>
-                        <p class="text-xs text-slate-400 leading-relaxed">조명 플롯 제작, 반입 및 메모리얼 메모리얼 셋업 포함</p>
+                <!-- Crew Cost Table -->
+                <h3 class="text-center text-sm font-semibold text-slate-300 mb-6">크루비용 (1일 기준)</h3>
+                <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 shadow-xl overflow-hidden mb-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-700 bg-slate-800 text-xs uppercase tracking-wider text-slate-300">
+                                    <th class="py-3 px-4 font-semibold">구분/등급</th>
+                                    <th class="py-3 px-4 font-semibold text-right">단가(원)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-700/60 text-slate-300">
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">조명 프로그래머</td><td class="py-2.5 px-4 text-right">300,000원 ~ 600,000원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">1급</td><td class="py-2.5 px-4 text-right">312,655원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">2급</td><td class="py-2.5 px-4 text-right">247,818원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">3급</td><td class="py-2.5 px-4 text-right">179,781원</td></tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 shadow-xl p-4">
-                        <div class="flex items-center justify-between gap-2 mb-2">
-                            <h3 class="font-bold text-white text-sm">중·대극장 공연 / 뮤지컬 / 전통무용</h3>
-                            <span class="font-semibold text-brand-400 text-sm whitespace-nowrap">300만원 ~</span>
-                        </div>
-                        <p class="text-xs text-slate-400 mb-1">예상 소요기간: 2 ~ 4주</p>
-                        <p class="text-xs text-slate-400 leading-relaxed">무대조명 디자인, 특수효과 및 드라이런 총괄</p>
-                    </div>
-                    <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 shadow-xl p-4">
-                        <div class="flex items-center justify-between gap-2 mb-2">
-                            <h3 class="font-bold text-white text-sm">축제 / 야외 행사 라이팅 디렉팅</h3>
-                            <span class="font-semibold text-brand-400 text-sm whitespace-nowrap">상세 협의</span>
-                        </div>
-                        <p class="text-xs text-slate-400 mb-1">예상 소요기간: 1 ~ 3주</p>
-                        <p class="text-xs text-slate-400 leading-relaxed">현장 프로젝션 및 야외 무대 셋업 시스템 구축</p>
-                    </div>
-                    <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 shadow-xl p-4">
-                        <div class="flex items-center justify-between gap-2 mb-2">
-                            <h3 class="font-bold text-white text-sm">무대 기술감독 / 조명 컨설팅</h3>
-                            <span class="font-semibold text-brand-400 text-sm whitespace-nowrap">상세 협의</span>
-                        </div>
-                        <p class="text-xs text-slate-400 mb-1">예상 소요기간: 프로젝트별</p>
-                        <p class="text-xs text-slate-400 leading-relaxed">공연장 무대 안전 관리, 조명장비 세팅 및 운영 감리</p>
-                    </div>
+                    <p class="text-xs text-yellow-400 italic px-6 py-3">※ 조명 장비 대여비, 트러스/리깅, 교통비, 숙박비, 식대 등은 별도 협의 (상기 가격 미포함)</p>
                 </div>
 
-                <!-- Footer Note & PDF Download -->
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                <!-- Footer Note -->
+                <div class="flex items-center justify-center gap-4 pt-2">
                     <p class="text-xs sm:text-sm text-amber-400/90 flex items-center gap-1.5">
                         <i class="fa-solid fa-triangle-exclamation"></i>
                         <span>정식 견적은 극장 조건 및 셋업 일정 검토 후 별도로 안내드립니다.</span>
                     </p>
-                    
-                    <a href="assets/estimate.pdf" download target="_blank" class="inline-flex items-center gap-2 text-xs font-medium px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors">
-                        <i class="fa-solid fa-file-pdf text-red-400"></i>
-                        <span>조명 포트폴리오/견적서 PDF 다운로드</span>
-                    </a>
                 </div>
             </div>
         </section>
@@ -351,7 +317,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="max-w-md mx-auto">
                     <!-- Direct Info -->
                     <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/80 flex flex-col justify-between">
                         <div>
@@ -376,35 +342,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Contact Form (Mailto trigger) -->
-                    <form id="contact-form" class="md:col-span-2 space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label for="sender-name" class="block text-xs font-medium text-slate-300 mb-1">성함 / 극단(단체명) *</label>
-                                <input type="text" id="sender-name" required placeholder="예: 극단 노뜰 / 홍길동 연출" class="w-full px-4 py-2.5 rounded-lg border border-slate-700 bg-slate-800 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
-                            </div>
-                            <div>
-                                <label for="sender-email" class="block text-xs font-medium text-slate-300 mb-1">답변받으실 이메일 *</label>
-                                <input type="email" id="sender-email" required placeholder="yourname@example.com" class="w-full px-4 py-2.5 rounded-lg border border-slate-700 bg-slate-800 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="email-subject" class="block text-xs font-medium text-slate-300 mb-1">문의 제목</label>
-                            <input type="text" id="email-subject" placeholder="[조명디자인 의뢰] 연극 공연 무대조명 의뢰 건" class="w-full px-4 py-2.5 rounded-lg border border-slate-700 bg-slate-800 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
-                        </div>
-
-                        <div>
-                            <label for="email-message" class="block text-xs font-medium text-slate-300 mb-1">문의 내용 *</label>
-                            <textarea id="email-message" rows="5" required placeholder="공연명, 공연 장소(극장), 극장 셋업 및 연습 일정, 예산 범위 등을 적어주시면 빠른 안내가 가능합니다." class="w-full px-4 py-2.5 rounded-lg border border-slate-700 bg-slate-800 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm resize-none"></textarea>
-                        </div>
-
-                        <button type="submit" class="w-full py-3 px-6 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-lg transition-colors text-sm shadow-sm flex items-center justify-center gap-2">
-                            <i class="fa-regular fa-paper-plane"></i>
-                            <span>이메일로 문의 보내기</span>
-                        </button>
-                    </form>
                 </div>
             </div>
         </section>
@@ -421,8 +358,11 @@
         /* Sample fallback data embedded for offline preview or missing JSON files */
         const DEFAULT_DATA = {
             works: [
-                { id: 1, title: "뿔난 오니" },
-                { id: 2, title: "꿈 아저씨 hope" },
+                { id: 123, title: "노들인디션(까치산)", youtube: "https://www.youtube.com/results?search_query=%EB%85%B8%EB%93%A4%EC%9D%B8%EB%94%94%EC%85%98+%EA%B9%8C%EC%B9%98%EC%82%B0" },
+                { id: 124, title: "노들인디션(크리스피)", youtube: "https://www.youtube.com/results?search_query=%EB%85%B8%EB%93%A4%EC%9D%B8%EB%94%94%EC%85%98+%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%94%BC" },
+                { id: 125, title: "노들인디션(극동아시아타이거즈)", youtube: "https://www.youtube.com/results?search_query=%EB%85%B8%EB%93%A4%EC%9D%B8%EB%94%94%EC%85%98+%EA%B7%B9%EB%8F%99%EC%95%84%EC%8B%9C%EC%95%84%ED%83%80%EC%9D%B4%EA%B1%B0%EC%A6%88" },
+                { id: 1, title: "뿔난 오니", youtube: "https://www.youtube.com/results?search_query=%EB%BF%94%EB%82%9C%EC%98%A4%EB%8B%88" },
+                { id: 2, title: "꿈 아저씨 hope", youtube: "https://www.youtube.com/results?search_query=%EA%BF%88+%EC%95%84%EC%A0%80%EC%94%A8+hope" },
                 { id: 3, title: "위선의 역사" },
                 { id: 4, title: "백일홍의 전설" },
                 { id: 5, title: "그의 집이 있다" },
@@ -629,6 +569,7 @@
                 <div class="break-inside-avoid flex items-center gap-2 py-2 border-b border-slate-800 text-sm text-slate-300">
                     <i class="fa-solid fa-lightbulb text-brand-500 text-[10px] shrink-0"></i>
                     <span>${item.title}</span>
+                    ${item.youtube ? `<a href="${item.youtube}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-red-500 transition-colors shrink-0" title="유튜브에서 보기"><i class="fa-brands fa-youtube"></i></a>` : ''}
                 </div>
             `).join('') + `
                 <div class="break-inside-avoid flex items-center gap-2 py-2 text-sm text-slate-400 italic">
@@ -704,21 +645,6 @@
                 link.addEventListener('click', () => {
                     mobileMenu.classList.add('hidden');
                 });
-            });
-
-            // Contact Form Mailto Handler
-            const contactForm = document.getElementById('contact-form');
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = document.getElementById('sender-name').value;
-                const email = document.getElementById('sender-email').value;
-                const subject = document.getElementById('email-subject').value || '[조명디자인 문의] ' + name + '님의 문의';
-                const message = document.getElementById('email-message').value;
-
-                const mailtoBody = `성함/단체명: ${name}\n답변 이메일: ${email}\n\n문의내용:\n${message}`;
-                const mailtoUrl = `mailto:musicalroom@kakao.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailtoBody)}`;
-                
-                window.location.href = mailtoUrl;
             });
 
             // Scroll Intersection Observer for Fade-in animation
