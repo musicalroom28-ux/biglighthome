@@ -521,24 +521,30 @@
                     title: "BIGLIGHT PLOT",
                     description: "무대조명 플롯(Plot) 및 패치표 제작을 위한 전용 유틸리티",
                     screenshot: "assets/program1.jpg",
-                    url: "https://musicalroom28-ux.github.io/BIGLIGHTPLOT/"
+                    icon: "fa-solid fa-diagram-project",
+                    url: "https://musicalroom28-ux.github.io/BIGLIGHTPLOT/",
+                    manualUrl: "https://musicalroom28-ux.github.io/biglightplotreport/"
                 },
                 {
                     title: "BIGLIGHT DMX MASTER",
                     description: "DMX 채널 관리 및 콘솔 프리셋 제어를 위한 전용 유틸리티",
                     screenshot: "assets/program2.jpg",
-                    url: "http://www.biglightmaster.store/"
+                    icon: "fa-solid fa-sliders",
+                    url: "http://www.biglightmaster.store/",
+                    manualUrl: "https://musicalroom28-ux.github.io/dmxmasterreport/"
                 },
                 {
                     title: "BIGLIGHT 견적서",
                     description: "무대조명디자인 견적서 작성을 위한 전용 유틸리티",
                     screenshot: "assets/program3.jpg",
+                    icon: "fa-solid fa-file-invoice-dollar",
                     url: "https://musicalroom28-ux.github.io/biglightquote/"
                 },
                 {
                     title: "BIGLIGHT STAFF MEET",
                     description: "무대조명 스태프 미팅 관리를 위한 전용 유틸리티",
                     screenshot: "assets/program4.jpg",
+                    icon: "fa-solid fa-users",
                     url: "https://musicalroom28-ux.github.io/biglightstaff/"
                 }
             ]
@@ -624,14 +630,24 @@
             container.innerHTML = programs.map(prog => `
                 <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/80 flex flex-col justify-between">
                     <div>
-                        <h3 class="font-bold text-white text-base mb-1">${prog.title}</h3>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="h-10 w-10 shrink-0 rounded-xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-lg">
+                                <i class="${prog.icon || 'fa-solid fa-toolbox'}"></i>
+                            </span>
+                            <h3 class="font-bold text-white text-base">${prog.title}</h3>
+                        </div>
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">${prog.description}</p>
                     </div>
-                    <div>
+                    <div class="flex flex-wrap gap-2">
                         <a href="${prog.url || '#'}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-brand-600 text-white rounded-lg text-xs font-medium transition-colors">
                             <i class="fa-solid fa-download text-[11px]"></i>
                             <span>실행 / 다운로드</span>
                         </a>
+                        ${prog.manualUrl ? `
+                        <a href="${prog.manualUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-brand-600 text-white rounded-lg text-xs font-medium transition-colors">
+                            <i class="fa-solid fa-book text-[11px]"></i>
+                            <span>사용설명서</span>
+                        </a>` : ''}
                     </div>
                 </div>
             `).join('');
