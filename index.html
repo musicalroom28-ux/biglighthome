@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIGLIGHT | 무대조명디자이너 & 기술감독</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom Styles & Animation Utilities */
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background-color: #0f172a;
+            color: #cbd5e1;
+        }
+
+        /* Fade-in scroll animation setup */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glassmorphic Navbar Background */
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Notice Board scrollbar & print styles */
+        .notice-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .notice-scrollbar::-webkit-scrollbar-track { background: #1e293b; }
+        .notice-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        .notice-scrollbar::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        @media print {
+            body * { visibility: hidden; }
+            #notice-printable-area, #notice-printable-area * { visibility: visible; }
+            #notice-printable-area { position: absolute; left: 0; top: 0; width: 100%; background: #fff; color: #0f172a; }
+            .notice-no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white text-slate-300">
+
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav border-b border-slate-800 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#profile" class="text-lg font-bold tracking-tight text-white hover:text-brand-500 transition-colors">
+                BIGLIGHT<span class="text-brand-500">.</span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#profile" class="hover:text-brand-500 transition-colors">소개 & 경력</a>
+                <a href="#works" class="hover:text-brand-500 transition-colors">작품 목록</a>
+                <a href="#notice" class="hover:text-brand-500 transition-colors">공지사항</a>
+                <a href="#history" class="hover:text-brand-500 transition-colors">공연/축제 이력</a>
+                <a href="#programs" class="hover:text-brand-500 transition-colors">조명프로그램</a>
+                <a href="#estimate" class="hover:text-brand-500 transition-colors">견적 안내</a>
+                <a href="#contact" class="hover:text-brand-500 transition-colors px-3 py-1.5 rounded-full bg-brand-600 text-white hover:bg-brand-700 transition-all shadow-sm">문의하기</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <!-- YouTube Channel Link -->
+                <a href="https://www.youtube.com/@visualguy5675" target="_blank" rel="noopener noreferrer" class="h-9 w-9 rounded-full bg-slate-800 border border-slate-700 hover:bg-red-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="유튜브 채널">
+                    <i class="fa-brands fa-youtube text-lg"></i>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none" aria-label="메뉴 열기">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#profile" class="mobile-link block text-slate-300 font-medium py-2">소개</a>
+            <a href="#works" class="mobile-link block text-slate-300 font-medium py-2">작품</a>
+            <a href="#notice" class="mobile-link block text-slate-300 font-medium py-2">공지사항</a>
+            <a href="#history" class="mobile-link block text-slate-300 font-medium py-2">공연/이력</a>
+            <a href="#programs" class="mobile-link block text-slate-300 font-medium py-2">조명프로그램</a>
+            <a href="#estimate" class="mobile-link block text-slate-300 font-medium py-2">견적 안내</a>
+            <a href="#contact" class="mobile-link block text-slate-300 font-medium py-2 text-brand-500 font-semibold">문의하기</a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section id="profile" class="fade-in-section min-h-[85vh] flex items-center justify-center py-16 md:py-24 bg-slate-900 text-white">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col-reverse md:flex-row items-center gap-10 md:gap-16">
+                    <!-- Text Info -->
+                    <div class="flex-1 text-center md:text-left">
+                        <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-brand-500 uppercase bg-slate-800 rounded-full border border-slate-700">
+                            Stage Lighting Design & Technical Director
+                        </span>
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-3">
+                            빛의 서사를 만드는 <br class="hidden sm:inline"><span class="text-brand-600">BIGLIGHT</span>입니다.
+                        </h1>
+                        <p class="text-lg md:text-xl font-medium text-slate-300 mb-6">
+                            무대조명 디자이너
+                        </p>
+
+                        <!-- 3-5 lines intro -->
+                        <div class="text-slate-300 leading-relaxed space-y-2 mb-8 text-sm sm:text-base max-w-2xl">
+                            <p>국내외 800여 작품의 연극, 무용, 뮤지컬, 클래식, 국악 공연 조명 디자인을 진행해온 전문 무대조명 디자이너입니다.</p>
+                            <p>국립아시아문화전당, 서울문화재단, 성북문화재단, 극단 노뜰 등 주요 문화예술기관 및 단체의 기술감독과 조명디자이너로 활동하였습니다.</p>
+                            <p>빛과 정교한 인스톨레이션을 통해 무대 위 감정과 서사를 정교하게 연출합니다.</p>
+                        </div>
+
+                        <!-- SNS & Contact Links -->
+                        <div class="flex items-center justify-center md:justify-start space-x-4 mb-6">
+                            <a href="mailto:musicalroom@kakao.com" id="email-contact-link" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="이메일 문의" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>musicalroom@kakao.com</span>';">
+                                <i class="fa-regular fa-envelope text-lg"></i>
+                            </a>
+                            <a href="tel:010-2198-4854" id="phone-contact-link" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="연락처 정보" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>010-2198-4854</span>';">
+                                <i class="fa-solid fa-phone text-lg"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <!-- Profile Image (Placeholder Structure) -->
+                    <div class="w-72 h-72 sm:w-96 sm:h-96 rounded-2xl overflow-hidden shadow-xl border-4 border-slate-800 bg-slate-900 shrink-0 relative group">
+                        <!-- Default placeholder or real image -->
+                        <img id="profile-img"
+                             src="https://raw.githubusercontent.com/musicalroom28-ux/biglighthome/main/img/1.png"
+                             onerror="this.onerror=null; this.src='https://placehold.co/500x500/0f172a/f8fafc?text=BIGLIGHT+Design';" 
+                             alt="BIGLIGHT 조명디자이너" 
+                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="works" class="fade-in-section py-20 bg-slate-900 text-white border-t border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">주요 조명디자인 작품</h2>
+                        <p class="text-slate-400 mt-2 text-sm sm:text-base">연극, 현대무용, 전통공연, 클래식 및 아동극 무대 조명 연출 작품입니다.</p>
+                        <div class="flex items-center justify-center md:justify-start space-x-4 mt-4">
+                            <a href="mailto:musicalroom@kakao.com" id="email-contact-link-works" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="이메일 문의" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>musicalroom@kakao.com</span>';">
+                                <i class="fa-regular fa-envelope text-lg"></i>
+                            </a>
+                            <a href="tel:010-2198-4854" id="phone-contact-link-works" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="연락처 정보" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>010-2198-4854</span>';">
+                                <i class="fa-solid fa-phone text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <span class="text-xs text-slate-400 mt-2 md:mt-0"><i class="fa-solid fa-lightbulb mr-1"></i>800+ 작품 진행</span>
+                </div>
+
+                <!-- Works List Container -->
+                <div id="works-grid" class="columns-1 sm:columns-2 lg:columns-3 gap-x-10">
+                    <!-- Dynamic rendering target for works.json -->
+                    <div class="text-center py-12 text-slate-400">
+                        <i class="fa-solid fa-spinner animate-spin text-2xl mb-2"></i>
+                        <p>작품 불러오는 중...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="notice" class="fade-in-section py-20 bg-slate-900 text-white border-t border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                    <div>
+                        <span class="text-brand-500 font-medium text-xs tracking-widest uppercase mb-2 block">Notice Board</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">공지사항</h2>
+                        <p class="text-slate-400 mt-2 text-sm sm:text-base">공연 일정, 시스템 점검, 이벤트 등 주요 소식을 안내드립니다.</p>
+                    </div>
+                    <div class="flex items-center gap-3 notice-no-print">
+                        <button id="adminToggleBtn" onclick="toggleNoticeAdminMode()"
+                                class="inline-flex items-center space-x-1.5 px-3 py-2 rounded-lg text-xs font-bold transition border border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700">
+                            <i class="fa-solid fa-user-shield text-slate-400" id="adminToggleIcon"></i>
+                            <span id="adminToggleText">일반 모드</span>
+                        </button>
+                        <div id="adminOnlyActions" class="hidden items-center gap-2">
+                            <button onclick="openNoticeModal('editorModal'); prepareNewNoticeForm();"
+                                    class="inline-flex items-center gap-1.5 bg-brand-600 hover:bg-brand-700 text-white px-3 py-2 rounded-lg text-xs font-medium transition shadow-sm active:scale-95">
+                                <i class="fa-solid fa-plus text-[10px]"></i>
+                                <span>새 공지 작성</span>
+                            </button>
+                            <button onclick="exportNoticeData()" title="데이터 내보내기" class="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition">
+                                <i class="fa-solid fa-download"></i>
+                            </button>
+                            <label title="데이터 불러오기" class="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition cursor-pointer">
+                                <i class="fa-solid fa-upload"></i>
+                                <input type="file" id="importFileInput" onchange="importNoticeData(event)" class="hidden" accept=".json">
+                            </label>
+                            <button onclick="confirmResetNoticeData()" title="초기 데이터 복원" class="p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition">
+                                <i class="fa-solid fa-rotate-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stat Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 flex items-center justify-between">
+                        <div>
+                            <p class="text-[11px] font-semibold uppercase text-slate-500">전체 공지</p>
+                            <p id="statTotalNotices" class="text-2xl font-bold text-white mt-1">0</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-brand-600/20 text-brand-500 flex items-center justify-center">
+                            <i class="fa-solid fa-newspaper"></i>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 flex items-center justify-between">
+                        <div>
+                            <p class="text-[11px] font-semibold uppercase text-slate-500">상단 고정 (필독)</p>
+                            <p id="statPinnedNotices" class="text-2xl font-bold text-amber-400 mt-1">0</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center">
+                            <i class="fa-solid fa-thumbtack"></i>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 flex items-center justify-between">
+                        <div>
+                            <p class="text-[11px] font-semibold uppercase text-slate-500">총 누적 조회수</p>
+                            <p id="statTotalViews" class="text-2xl font-bold text-emerald-400 mt-1">0</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 flex items-center justify-between">
+                        <div>
+                            <p class="text-[11px] font-semibold uppercase text-slate-500">임시저장 공지</p>
+                            <p id="statDraftNotices" class="text-2xl font-bold text-purple-400 mt-1">0</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center">
+                            <i class="fa-solid fa-file-pen"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toolbar -->
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 space-y-4 mb-6 notice-no-print">
+                    <div class="flex items-center justify-between border-b border-slate-700/80 pb-3 overflow-x-auto notice-scrollbar">
+                        <div class="flex space-x-1" id="categoryTabContainer"></div>
+                        <div class="flex items-center space-x-2 pl-4 shrink-0">
+                            <button id="btnViewTable" onclick="setNoticeViewMode('table')" class="p-2 text-brand-500 bg-brand-600/10 rounded font-medium text-xs flex items-center space-x-1">
+                                <i class="fa-solid fa-list-ul"></i><span class="hidden sm:inline">목록</span>
+                            </button>
+                            <button id="btnViewGrid" onclick="setNoticeViewMode('grid')" class="p-2 text-slate-500 hover:text-brand-500 rounded hover:bg-slate-700/60 font-medium text-xs flex items-center space-x-1">
+                                <i class="fa-solid fa-grip"></i><span class="hidden sm:inline">카드</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3 justify-between items-center">
+                        <div class="relative w-full sm:w-80">
+                            <input type="text" id="searchInput" oninput="handleNoticeSearch()" placeholder="제목, 내용 또는 작성자 검색..."
+                                   class="w-full pl-9 pr-8 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-500 text-sm"></i>
+                            <button id="clearSearchBtn" onclick="clearNoticeSearch()" class="hidden absolute right-3 top-2.5 text-slate-500 hover:text-slate-300">
+                                <i class="fa-solid fa-xmark text-xs"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
+                            <select id="statusFilter" onchange="applyNoticeFilters()" class="px-3 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-xs font-medium text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <option value="ALL">전체 상태</option>
+                                <option value="PUBLISHED" selected>게시됨</option>
+                                <option value="DRAFT">임시저장만</option>
+                            </select>
+                            <select id="sortSelect" onchange="applyNoticeFilters()" class="px-3 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-xs font-medium text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <option value="newest">최신 등록순</option>
+                                <option value="oldest">오래된순</option>
+                                <option value="views">조회수 높은순</option>
+                                <option value="comments">댓글 많은순</option>
+                            </select>
+                            <select id="pageSizeSelect" onchange="changeNoticePageSize()" class="px-3 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-xs font-medium text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <option value="5">5개씩</option>
+                                <option value="10" selected>10개씩</option>
+                                <option value="20">20개씩</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Area -->
+                <div id="noticeContentArea" class="min-h-[300px]">
+                    <div id="tableViewContainer" class="bg-slate-800/80 rounded-xl border border-slate-700/80 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-800 border-b border-slate-700 text-xs font-semibold text-slate-400 tracking-wider uppercase">
+                                        <th class="py-3 px-4 w-16 text-center">번호</th>
+                                        <th class="py-3 px-3 w-28">분류</th>
+                                        <th class="py-3 px-4">제목</th>
+                                        <th class="py-3 px-3 w-28">작성자</th>
+                                        <th class="py-3 px-3 w-28 text-center">작성일</th>
+                                        <th class="py-3 px-3 w-20 text-center">조회</th>
+                                        <th class="py-3 px-3 w-16 text-center">첨부</th>
+                                        <th class="py-3 px-3 w-20 text-center notice-no-print">관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="noticeTableBody" class="divide-y divide-slate-700/60 text-sm text-slate-300"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="gridViewContainer" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+                    <div id="emptyState" class="hidden bg-slate-800/80 rounded-xl border border-slate-700/80 p-12 text-center">
+                        <div class="w-16 h-16 mx-auto bg-slate-700/60 rounded-full flex items-center justify-center text-slate-400 mb-3">
+                            <i class="fa-solid fa-inbox text-2xl"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-white">검색 또는 등록된 공지사항이 없습니다</h3>
+                        <p class="text-xs text-slate-400 mt-1">새로운 공지글을 작성하거나 검색 조건을 변경해보세요.</p>
+                        <button id="emptyStateAddBtn" onclick="openNoticeModal('editorModal'); prepareNewNoticeForm();" class="hidden mt-4 px-4 py-2 bg-brand-600 text-white rounded-lg text-xs font-medium hover:bg-brand-700 transition">
+                            + 첫 공지 작성하기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 notice-no-print">
+                    <div class="text-xs text-slate-500">
+                        총 <span id="totalItemsCount" class="font-bold text-slate-200">0</span>개의 공지사항 중
+                        <span id="pageRangeText" class="font-medium text-slate-400">0-0</span> 표시 중
+                    </div>
+                    <div class="flex items-center space-x-1" id="paginationControls"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="history" class="fade-in-section py-20 bg-slate-900 text-white border-t border-slate-800">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-xl mx-auto mb-16">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">공연 & 축제 참여 이력</h2>
+                    <p class="text-slate-400 mt-2 text-sm sm:text-base">주요 연출, 키비주얼 디자인 및 참여 프로젝트 연혁입니다.</p>
+                    <div class="flex items-center justify-center space-x-4 mt-4">
+                        <a href="mailto:musicalroom@kakao.com" id="email-contact-link-history" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="이메일 문의" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>musicalroom@kakao.com</span>';">
+                            <i class="fa-regular fa-envelope text-lg"></i>
+                        </a>
+                        <a href="tel:010-2198-4854" id="phone-contact-link-history" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="연락처 정보" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>010-2198-4854</span>';">
+                            <i class="fa-solid fa-phone text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- History Timeline Container -->
+                <div id="history-container" class="relative border-l-2 border-slate-700 ml-4 md:ml-32 space-y-10">
+                    <!-- Dynamic rendering target for history.json -->
+                </div>
+            </div>
+        </section>
+
+        <section id="programs" class="fade-in-section py-20 bg-slate-900 text-white border-t border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-xl mx-auto mb-16">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">조명프로그램</h2>
+                    <p class="text-slate-400 mt-2 text-sm sm:text-base">효율적인 그래픽 작업과 연출을 위해 직접 제작한 유틸리티입니다.</p>
+                    <div class="flex items-center justify-center space-x-4 mt-4">
+                        <a href="mailto:musicalroom@kakao.com" id="email-contact-link-programs" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="이메일 문의" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>musicalroom@kakao.com</span>';">
+                            <i class="fa-regular fa-envelope text-lg"></i>
+                        </a>
+                        <a href="tel:010-2198-4854" id="phone-contact-link-programs" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="연락처 정보" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>010-2198-4854</span>';">
+                            <i class="fa-solid fa-phone text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Programs Grid Container -->
+                <div id="programs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Dynamic rendering target for programs.json -->
+                </div>
+            </div>
+        </section>
+
+        <section id="estimate" class="fade-in-section py-20 bg-slate-900 text-white">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-brand-500 font-medium text-xs tracking-widest uppercase mb-2 block">Estimate Guide</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">무대조명디자인 견적 안내</h2>
+                    <p class="text-slate-400 mt-2 text-sm sm:text-base">공연 규모 및 기간, 현장 셋업 조건에 따른 외주 디자인 참고 가격입니다.</p>
+                    <div class="flex items-center justify-center space-x-4 mt-4">
+                        <a href="mailto:musicalroom@kakao.com" id="email-contact-link-estimate" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="이메일 문의" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>musicalroom@kakao.com</span>';">
+                            <i class="fa-regular fa-envelope text-lg"></i>
+                        </a>
+                        <a href="tel:010-2198-4854" id="phone-contact-link-estimate" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="연락처 정보" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>010-2198-4854</span>';">
+                            <i class="fa-solid fa-phone text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Estimate Table -->
+                <h3 class="text-center text-sm font-semibold text-slate-300 mb-6">무대조명디자인 견적 예시</h3>
+                <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 shadow-xl overflow-hidden mb-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-700 bg-slate-800 text-xs uppercase tracking-wider text-slate-300">
+                                    <th class="py-3 px-4 font-semibold">공연 장르</th>
+                                    <th class="py-3 px-4 font-semibold text-right">500석 이하</th>
+                                    <th class="py-3 px-4 font-semibold text-right">500석~800석</th>
+                                    <th class="py-3 px-4 font-semibold text-right">1000석 이상</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-700/60 text-slate-300">
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">연극</td><td class="py-2.5 px-4 text-right">500,000원</td><td class="py-2.5 px-4 text-right">800,000원</td><td class="py-2.5 px-4 text-right">1,000,000원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">무용</td><td class="py-2.5 px-4 text-right">700,000원</td><td class="py-2.5 px-4 text-right">1,000,000원</td><td class="py-2.5 px-4 text-right">1,500,000원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">콘서트</td><td class="py-2.5 px-4 text-right">700,000원</td><td class="py-2.5 px-4 text-right">1,000,000원</td><td class="py-2.5 px-4 text-right">1,500,000원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">뮤지컬</td><td class="py-2.5 px-4 text-right">700,000원</td><td class="py-2.5 px-4 text-right">1,000,000원</td><td class="py-2.5 px-4 text-right">1,500,000원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">기타 공연 및 행사</td><td class="py-2.5 px-4 text-right">500,000원</td><td class="py-2.5 px-4 text-right">800,000원</td><td class="py-2.5 px-4 text-right">1,000,000원</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-yellow-400 italic px-6 py-3">※ 조명 장비 대여비, 트러스/리깅, 교통비, 숙박비, 식대 등은 별도 협의 (상기 가격 미포함)</p>
+                </div>
+
+                <!-- Crew Cost Table -->
+                <h3 class="text-center text-sm font-semibold text-slate-300 mb-6">크루비용 (1일 기준)</h3>
+                <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 shadow-xl overflow-hidden mb-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-700 bg-slate-800 text-xs uppercase tracking-wider text-slate-300">
+                                    <th class="py-3 px-4 font-semibold">구분/등급</th>
+                                    <th class="py-3 px-4 font-semibold text-right">단가(원)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-700/60 text-slate-300">
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">조명 프로그래머</td><td class="py-2.5 px-4 text-right">300,000원 ~ 600,000원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">1급</td><td class="py-2.5 px-4 text-right">312,655원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">2급</td><td class="py-2.5 px-4 text-right">247,818원</td></tr>
+                                <tr><td class="py-2.5 px-4 font-medium text-white whitespace-nowrap">3급</td><td class="py-2.5 px-4 text-right">179,781원</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-yellow-400 italic px-6 py-3">※ 조명 장비 대여비, 트러스/리깅, 교통비, 숙박비, 식대 등은 별도 협의 (상기 가격 미포함)</p>
+                </div>
+
+                <!-- Footer Note -->
+                <div class="flex items-center justify-center gap-4 pt-2">
+                    <p class="text-xs sm:text-sm text-amber-400/90 flex items-center gap-1.5">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span>정식 견적은 극장 조건 및 셋업 일정 검토 후 별도로 안내드립니다.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="fade-in-section py-20 bg-slate-900 text-white border-t border-slate-800">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-xl mx-auto mb-12">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">공연 문의하기</h2>
+                    <p class="text-slate-400 mt-2 text-sm sm:text-base">공연 조명 디자인 의뢰 및 기술감독 관련 문의는 이메일로 연락주세요.</p>
+                    <div class="flex items-center justify-center space-x-4 mt-4">
+                        <a href="mailto:musicalroom@kakao.com" id="email-contact-link-contact" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="이메일 문의" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>musicalroom@kakao.com</span>';">
+                            <i class="fa-regular fa-envelope text-lg"></i>
+                        </a>
+                        <a href="tel:010-2198-4854" id="phone-contact-link-contact" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="연락처 정보" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>010-2198-4854</span>';">
+                            <i class="fa-solid fa-phone text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="max-w-md mx-auto">
+                    <!-- Direct Info -->
+                    <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/80 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-white mb-4">Direct Contact</h3>
+                            <div class="space-y-4 text-sm text-slate-300">
+                                <div>
+                                    <span class="block text-xs text-slate-400 font-medium">Email</span>
+                                    <a href="mailto:musicalroom@kakao.com" class="font-medium text-brand-500 hover:underline">musicalroom@kakao.com</a>
+                                </div>
+                                <div>
+                                    <span class="block text-xs text-slate-400 font-medium">Field</span>
+                                    <p>무대조명디자인 / 무대기술감독</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SNS Re-exposure -->
+                        <div class="pt-6 border-t border-slate-700">
+                            <span class="block text-xs text-slate-400 font-medium mb-3">Portfolio Contact</span>
+                            <div class="flex items-center space-x-3">
+                                <a href="mailto:musicalroom@kakao.com" class="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-brand-500 transition-colors text-sm"><i class="fa-regular fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© <span id="year">2026</span> BIGLIGHT Stage Lighting Design. All rights reserved.</p>
+            <p class="text-slate-500">Stage Lighting & Technical Directing Portfolio</p>
+        </div>
+    </footer>
+
+    <!-- Notice Detail View Modal -->
+    <div id="detailModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl shadow-xl max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden transform scale-95 transition-transform duration-200 text-slate-300">
+            <div class="p-5 border-b border-slate-700 flex items-center justify-between bg-slate-900/60 notice-no-print">
+                <div class="flex items-center space-x-2">
+                    <span id="detailBadgeCategory" class="px-2.5 py-1 rounded-full text-xs font-bold bg-brand-600/20 text-brand-500">공지</span>
+                    <span id="detailBadgePinned" class="hidden px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-400">
+                        <i class="fa-solid fa-thumbtack mr-1"></i>필독
+                    </span>
+                    <span id="detailBadgeTarget" class="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-700 text-slate-300">전체</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="window.print()" title="인쇄하기" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-700 transition">
+                        <i class="fa-solid fa-print"></i>
+                    </button>
+                    <div id="adminDetailActions" class="hidden items-center space-x-2">
+                        <button onclick="editCurrentNoticeItem()" title="수정하기" class="p-2 text-slate-400 hover:text-brand-500 rounded-lg hover:bg-slate-700 transition">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button onclick="deleteCurrentNoticeItem()" title="삭제하기" class="p-2 text-slate-400 hover:text-rose-400 rounded-lg hover:bg-rose-500/10 transition">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                    <button onclick="closeNoticeModal('detailModal')" class="p-2 text-slate-500 hover:text-slate-300 rounded-lg transition">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-6 overflow-y-auto notice-scrollbar flex-1 space-y-6" id="notice-printable-area">
+                <div>
+                    <h2 id="detailTitle" class="text-xl sm:text-2xl font-bold text-white leading-snug">공지 제목이 들어갑니다</h2>
+                    <div class="mt-3 flex flex-wrap items-center gap-4 text-xs text-slate-500 border-b border-slate-700 pb-4">
+                        <span class="flex items-center font-medium text-slate-300"><i class="fa-solid fa-user-circle mr-1.5 text-slate-500"></i><span id="detailAuthor">관리자</span></span>
+                        <span><i class="fa-regular fa-clock mr-1"></i><span id="detailDate">2026-07-30</span></span>
+                        <span><i class="fa-regular fa-eye mr-1"></i>조회 <span id="detailViews">0</span></span>
+                    </div>
+                </div>
+
+                <div id="detailAttachmentBox" class="hidden bg-slate-900/60 border border-slate-700 rounded-xl p-3 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-slate-700 flex items-center justify-center text-slate-300">
+                            <i class="fa-solid fa-paperclip"></i>
+                        </div>
+                        <div>
+                            <p id="detailFileName" class="text-xs font-semibold text-slate-200">첨부파일.pdf</p>
+                            <p id="detailFileSize" class="text-[10px] text-slate-500">1.2 MB</p>
+                        </div>
+                    </div>
+                    <button onclick="downloadNoticeMockFile()" class="px-3 py-1.5 bg-slate-800 border border-slate-600 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-700 transition flex items-center space-x-1">
+                        <i class="fa-solid fa-download text-xs"></i>
+                        <span>다운로드</span>
+                    </button>
+                </div>
+
+                <div id="detailBody" class="prose prose-invert max-w-none text-slate-300 leading-relaxed text-sm min-h-[150px] whitespace-pre-line">
+                    공지사항 상세 내용입니다.
+                </div>
+
+                <div class="pt-6 border-t border-slate-700 notice-no-print">
+                    <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                        <i class="fa-regular fa-comments text-brand-500"></i>
+                        <span>댓글 (<span id="detailCommentCount">0</span>)</span>
+                    </h3>
+
+                    <div class="mt-3 flex gap-2">
+                        <input type="text" id="commentAuthorInput" placeholder="작성자" class="w-28 px-3 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                        <input type="text" id="commentTextInput" placeholder="의견이나 문의사항을 입력하세요..." class="flex-1 px-3 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                        <button onclick="addNoticeComment()" class="px-4 py-2 bg-brand-600 text-white rounded-lg text-xs font-medium hover:bg-brand-700 transition">등록</button>
+                    </div>
+
+                    <div id="commentList" class="mt-4 space-y-3"></div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-900/60 border-t border-slate-700 flex justify-between items-center text-xs notice-no-print">
+                <button id="btnPrevNotice" onclick="navigateNoticeItem(-1)" class="px-3 py-1.5 rounded bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-300 transition flex items-center space-x-1 disabled:opacity-40">
+                    <i class="fa-solid fa-chevron-left text-xs"></i><span>이전글</span>
+                </button>
+                <button onclick="closeNoticeModal('detailModal')" class="px-4 py-2 bg-brand-600 text-white rounded-lg font-medium hover:bg-brand-700 transition">
+                    닫기
+                </button>
+                <button id="btnNextNotice" onclick="navigateNoticeItem(1)" class="px-3 py-1.5 rounded bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-300 transition flex items-center space-x-1 disabled:opacity-40">
+                    <span>다음글</span><i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notice Form Editor Modal -->
+    <div id="editorModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl shadow-xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden transform scale-95 transition-transform duration-200">
+            <div class="p-5 border-b border-slate-700 flex items-center justify-between bg-slate-900/60">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-pen-to-square text-brand-500 text-lg"></i>
+                    <h2 id="editorTitle" class="text-lg font-bold text-white">새 공지사항 작성</h2>
+                </div>
+                <button onclick="closeNoticeModal('editorModal')" class="p-2 text-slate-500 hover:text-slate-300 rounded-lg transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form id="noticeForm" onsubmit="handleNoticeFormSubmit(event)" class="p-6 overflow-y-auto notice-scrollbar flex-1 space-y-4">
+                <input type="hidden" id="editNoticeId" value="">
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="md:col-span-1">
+                        <label class="block text-xs font-bold text-slate-300 mb-1">카테고리 <span class="text-rose-400">*</span></label>
+                        <select id="formCategory" required class="w-full px-3 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-xs font-medium text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <option value="일반">일반</option>
+                            <option value="필독">필독/중요</option>
+                            <option value="시스템">시스템</option>
+                            <option value="이벤트">이벤트</option>
+                            <option value="업데이트">업데이트</option>
+                        </select>
+                    </div>
+
+                    <div class="md:col-span-3">
+                        <label class="block text-xs font-bold text-slate-300 mb-1">제목 <span class="text-rose-400">*</span></label>
+                        <input type="text" id="formTitle" required placeholder="공지사항 제목을 입력하세요..."
+                               class="w-full px-3 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">작성자</label>
+                        <input type="text" id="formAuthor" value="관리자" class="w-full px-3 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">열람 대상</label>
+                        <select id="formTarget" class="w-full px-3 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-xs font-medium text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <option value="전체">전체 공개</option>
+                            <option value="회원 전용">회원 전용</option>
+                            <option value="임직원">임직원 전용</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center space-x-3 pt-5">
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="formPinned" class="sr-only peer">
+                            <div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
+                        </label>
+                        <span class="text-xs font-bold text-amber-400 flex items-center">
+                            <i class="fa-solid fa-thumbtack mr-1"></i>상단 고정 (필독)
+                        </span>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <label class="block text-xs font-bold text-slate-300 mb-1">공지 내용 <span class="text-rose-400">*</span></label>
+                    <div class="border border-slate-700 rounded-xl overflow-hidden bg-slate-900/60">
+                        <div class="bg-slate-800 p-2 border-b border-slate-700 flex flex-wrap gap-1 text-slate-300 text-xs">
+                            <button type="button" onclick="insertNoticeFormatting('**', '**')" title="굵게" class="p-1.5 hover:bg-slate-700 rounded"><i class="fa-solid fa-bold"></i></button>
+                            <button type="button" onclick="insertNoticeFormatting('*', '*')" title="기울임" class="p-1.5 hover:bg-slate-700 rounded"><i class="fa-solid fa-italic"></i></button>
+                            <button type="button" onclick="insertNoticeFormatting('### ', '')" title="제목3" class="p-1.5 hover:bg-slate-700 rounded"><i class="fa-solid fa-heading"></i></button>
+                            <span class="h-4 w-px bg-slate-600 my-auto mx-1"></span>
+                            <button type="button" onclick="insertNoticeFormatting('- ', '')" title="목록" class="p-1.5 hover:bg-slate-700 rounded"><i class="fa-solid fa-list-ul"></i></button>
+                            <button type="button" onclick="insertNoticeFormatting('> ', '')" title="인용문" class="p-1.5 hover:bg-slate-700 rounded"><i class="fa-solid fa-quote-left"></i></button>
+                            <button type="button" onclick="insertNoticeFormatting('[💡 참고: ', ']')" title="강조 박스" class="p-1.5 hover:bg-slate-700 rounded"><i class="fa-solid fa-lightbulb"></i></button>
+                            <span class="h-4 w-px bg-slate-600 my-auto mx-1"></span>
+                            <button type="button" onclick="insertNoticeFormatting('[링크텍스트](https://)', '')" title="링크" class="p-1.5 hover:bg-slate-700 rounded"><i class="fa-solid fa-link"></i></button>
+                        </div>
+                        <textarea id="formBody" required rows="10" placeholder="공지 내용을 작성하세요..."
+                                  class="w-full p-3 text-xs leading-relaxed bg-transparent text-white placeholder-slate-500 focus:outline-none notice-scrollbar resize-none"></textarea>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <label class="block text-xs font-bold text-slate-300 mb-1">첨부파일 (선택)</label>
+                    <div class="flex items-center gap-3">
+                        <input type="text" id="formFileName" placeholder="첨부파일명 (예: 서비스_안내문.pdf)" class="flex-1 px-3 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <input type="text" id="formFileSize" placeholder="용량 (예: 2.4 MB)" class="w-28 px-3 py-2 bg-slate-900/60 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end space-x-2 border-t border-slate-700">
+                    <button type="button" onclick="closeNoticeModal('editorModal')" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg text-xs font-medium transition">
+                        취소
+                    </button>
+                    <button type="button" onclick="saveNoticeDraft()" class="px-4 py-2 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/30 rounded-lg text-xs font-medium transition">
+                        <i class="fa-solid fa-floppy-disk mr-1"></i>임시저장
+                    </button>
+                    <button type="submit" class="px-5 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-xs font-medium transition shadow-sm">
+                        <i class="fa-solid fa-paper-plane mr-1"></i>게시하기
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Modal -->
+    <div id="confirmModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl shadow-xl max-w-sm w-full p-6 text-center transform scale-95 transition-transform duration-200">
+            <div class="w-12 h-12 rounded-full bg-rose-500/15 text-rose-400 flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+            </div>
+            <h3 id="confirmTitle" class="text-base font-bold text-white">확인</h3>
+            <p id="confirmMessage" class="text-xs text-slate-400 mt-2">정말로 실행하시겠습니까?</p>
+            <div class="mt-6 flex justify-center space-x-3">
+                <button onclick="closeNoticeModal('confirmModal')" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg text-xs font-medium transition">취소</button>
+                <button id="confirmBtnAction" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-medium transition">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Authentication Modal -->
+    <div id="adminAuthModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl shadow-xl max-w-sm w-full p-6 transform scale-95 transition-transform duration-200 text-center">
+            <div class="w-12 h-12 rounded-full bg-brand-600/20 text-brand-500 flex items-center justify-center mx-auto mb-3">
+                <i class="fa-solid fa-user-shield text-xl"></i>
+            </div>
+            <h3 class="text-base font-bold text-white">관리자 모드 인증</h3>
+            <p class="text-xs text-slate-400 mt-1">공지사항 관리 권한을 획득하려면 관리자 계정으로 로그인하세요.</p>
+
+            <form onsubmit="handleNoticeAdminAuth(event)" class="mt-4 space-y-3">
+                <input type="email" id="adminEmailInput" placeholder="관리자 이메일" required
+                       class="w-full px-3 py-2 text-center text-sm bg-slate-900/60 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+                <input type="password" id="adminPasswordInput" placeholder="비밀번호 입력" required
+                       class="w-full px-3 py-2 text-center text-sm bg-slate-900/60 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+                <div class="flex space-x-2">
+                    <button type="button" onclick="closeNoticeModal('adminAuthModal')" class="flex-1 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg text-xs font-medium transition">취소</button>
+                    <button type="submit" class="flex-1 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-xs font-medium transition shadow-sm">인증하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notice Toast Notification Overlay -->
+    <div id="noticeToastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <script>
+        /* Sample fallback data embedded for offline preview or missing JSON files */
+        const DEFAULT_DATA = {
+            works: [
+                { id: 123, title: "노들인디션(까치산)", youtube: "https://www.youtube.com/results?search_query=%EB%85%B8%EB%93%A4%EC%9D%B8%EB%94%94%EC%85%98+%EA%B9%8C%EC%B9%98%EC%82%B0" },
+                { id: 124, title: "노들인디션(크리스피)", youtube: "https://www.youtube.com/results?search_query=%EB%85%B8%EB%93%A4%EC%9D%B8%EB%94%94%EC%85%98+%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%94%BC" },
+                { id: 125, title: "노들인디션(극동아시아타이거즈)", youtube: "https://www.youtube.com/results?search_query=%EB%85%B8%EB%93%A4%EC%9D%B8%EB%94%94%EC%85%98+%EA%B7%B9%EB%8F%99%EC%95%84%EC%8B%9C%EC%95%84%ED%83%80%EC%9D%B4%EA%B1%B0%EC%A6%88" },
+                { id: 1, title: "뿔난 오니", youtube: "https://www.youtube.com/results?search_query=%EB%BF%94%EB%82%9C%EC%98%A4%EB%8B%88" },
+                { id: 2, title: "꿈 아저씨 hope", youtube: "https://www.youtube.com/results?search_query=%EA%BF%88+%EC%95%84%EC%A0%80%EC%94%A8+hope" },
+                { id: 3, title: "위선의 역사" },
+                { id: 4, title: "백일홍의 전설" },
+                { id: 5, title: "그의 집이 있다" },
+                { id: 6, title: "지구의 정복자" },
+                { id: 7, title: "계단의 아이" },
+                { id: 8, title: "울어버린 빨간 오니" },
+                { id: 9, title: "길 위에 리어" },
+                { id: 10, title: "TAKE OFF" },
+                { id: 11, title: "베리베리 판타스틱" },
+                { id: 12, title: "케카이" },
+                { id: 13, title: "미스줄리" },
+                { id: 14, title: "귀환" },
+                { id: 15, title: "충남무용제" },
+                { id: 16, title: "성스러운 불꽃" },
+                { id: 17, title: "My Bloody" },
+                { id: 18, title: "신 해바라기" },
+                { id: 19, title: "베르나르다" },
+                { id: 20, title: "의자들" },
+                { id: 21, title: "오후다섯시" },
+                { id: 22, title: "보이체크" },
+                { id: 23, title: "핑팽퐁" },
+                { id: 24, title: "플립플립이야기" },
+                { id: 25, title: "베르나르다 알바의집" },
+                { id: 26, title: "난 전화를 걸려고 온 것 뿐이예요" },
+                { id: 27, title: "대전젊은 무용예술가전" },
+                { id: 28, title: "노부인의 방문" },
+                { id: 29, title: "싱크로나이즈" },
+                { id: 30, title: "The Buddha My Body" },
+                { id: 31, title: "타이피스트" },
+                { id: 32, title: "카페 더 로스트" },
+                { id: 33, title: "동방의 햄릿" },
+                { id: 34, title: "RIAU" },
+                { id: 35, title: "죽음여행" },
+                { id: 36, title: "페드라" },
+                { id: 37, title: "담배 밭" },
+                { id: 38, title: "루나틱" },
+                { id: 39, title: "채플린,지팡이를 잃어 버리다" },
+                { id: 40, title: "신판놀음" },
+                { id: 41, title: "Muse dance company" },
+                { id: 42, title: "드림앤댄스페스트발" },
+                { id: 43, title: "동방의 햄릿" },
+                { id: 44, title: "심청가" },
+                { id: 45, title: "까발레리아 루스티가나" },
+                { id: 46, title: "불 좀 꺼주세요" },
+                { id: 47, title: "하늘의 연인 웅녀" },
+                { id: 48, title: "상임안무가전" },
+                { id: 49, title: "전국연극제" },
+                { id: 50, title: "엄정자의 춤" },
+                { id: 51, title: "전국무용제" },
+                { id: 52, title: "버블마임" },
+                { id: 53, title: "작은 아씨들" },
+                { id: 54, title: "까발레리아 루스티카나 팔리아쵸" },
+                { id: 55, title: "제30회구미시립무용단공연" },
+                { id: 56, title: "무용과 발표회" },
+                { id: 57, title: "무용과 졸업 발표회" },
+                { id: 58, title: "홀인원" },
+                { id: 59, title: "2002 컬처로드" },
+                { id: 60, title: "떳다 보아라 안창남 비행기" },
+                { id: 61, title: "오래된 알" },
+                { id: 62, title: "제5회 프린지페스티발" },
+                { id: 63, title: "충북연극제" },
+                { id: 64, title: "베세토연극제" },
+                { id: 65, title: "춘희" },
+                { id: 66, title: "별각시" },
+                { id: 67, title: "전통 무용의 밤" },
+                { id: 68, title: "오래된 알" },
+                { id: 69, title: "더블웨이" },
+                { id: 70, title: "불안정" },
+                { id: 71, title: "오래된 알" },
+                { id: 72, title: "엄마의 치자꽃" },
+                { id: 73, title: "갈라 오페라타" },
+                { id: 74, title: "상임안무가전" },
+                { id: 75, title: "명동야화" },
+                { id: 76, title: "발광의 사유" },
+                { id: 77, title: "북경 초청공연(갈라)" },
+                { id: 78, title: "천명의 소리" },
+                { id: 79, title: "아홉번째 날" },
+                { id: 80, title: "발광의 사유" },
+                { id: 81, title: "상임 안무가 공연" },
+                { id: 82, title: "사로잡힌 영혼" },
+                { id: 83, title: "존재의 욕망 그 넘어" },
+                { id: 84, title: "세월이 가면" },
+                { id: 85, title: "AIDA" },
+                { id: 86, title: "중국 동방 가무" },
+                { id: 87, title: "춘향전" },
+                { id: 88, title: "충청 무용제전" },
+                { id: 89, title: "사로잡힌 영혼" },
+                { id: 90, title: "전하" },
+                { id: 91, title: "나는 있는 현실을 그대로 바라본다" },
+                { id: 92, title: "혈맥" },
+                { id: 93, title: "봉화" },
+                { id: 94, title: "돼지를 잡아먹은 쏘크라테스" },
+                { id: 95, title: "에쿠우스" },
+                { id: 96, title: "햄릿 이야기" },
+                { id: 97, title: "카발레리아 루스티카나" },
+                { id: 98, title: "햄릿 이야기" },
+                { id: 99, title: "꿈 하늘" },
+                { id: 100, title: "역마살" },
+                { id: 101, title: "홍도야! 우지마라" },
+                { id: 102, title: "서툰 사람들" },
+                { id: 103, title: "그것은 목탁구멍속의 작은 어둠이었다" },
+                { id: 104, title: "안티고네" },
+                { id: 105, title: "고도를 기다리며" },
+                { id: 106, title: "청주 국제무용제" },
+                { id: 107, title: "산불" },
+                { id: 108, title: "우리읍내" },
+                { id: 109, title: "장옥주의 춤" },
+                { id: 110, title: "칠산리" },
+                { id: 111, title: "로미오 와 쥴리엣" },
+                { id: 112, title: "끈" },
+                { id: 113, title: "아브라삭스" },
+                { id: 114, title: "엘렉트라" },
+                { id: 115, title: "들풀" },
+                { id: 116, title: "갈매기" },
+                { id: 117, title: "칠산리" },
+                { id: 118, title: "산불 쇼케이스" },
+                { id: 119, title: "엠빠르 리베라" },
+                { id: 120, title: "꼬불꼬불 연극체험" },
+                { id: 121, title: "백구이야기" },
+                { id: 122, title: "충북연극제" }
+            ],
+            history: [
+                {
+                    year: "학력",
+                    event: "상명대학교 대학원 무대미술학과 무대조명디자인 전공 (예술학 석사)",
+                    role: "청주대학교 연극영화학과 무대조명디자인 졸업 (문학사)",
+                    description: "무대 조명 미학 및 기술에 대한 학술적 기반과 이론적·실무적 연구 수행"
+                },
+                {
+                    year: "주요 경력",
+                    event: "국립아시아문화전당재단 기술감독 / 국립아시아문화전당 조명감독",
+                    role: "극단 노뜰 조명디자이너 및 조명감독",
+                    description: "성북문화재단 미아리고개예술극장 기술감독, 서울문화재단 라이브하우스 조명책임감독, 국립남도국악원 무대계장 역임"
+                },
+                {
+                    year: "극장 및 예술단",
+                    event: "공주문화재단 / 통영국제음악당 / 반월아트홀 / 안양아트센터 / 예술의전당 조명감독",
+                    role: "한국영상대학교 겸임조교수 & 아르코인력개발원 주강사",
+                    description: "NH아트홀, 청심평화월드센터 무대감독 및 국내 주요 아트센터 무대기술 조명총괄 진행"
+                },
+                {
+                    year: "국외 투어",
+                    event: "국내외 국제페스티벌 참가 및 해외 초청공연",
+                    role: "아시아아트플럭스 공동창작 제작 참가 / 서울아트마켓(PAMS) / 서울국제공연예술제 참여",
+                    description: "일본 도가페스티발 / 베세토연극제 / BIRD페스티벌(돗토리현) / 오키나와 · 대만 Asia Arts Live / Kuandu Arts 페스티벌(국립예술대학교) / 카오슝 · 중국 동방초청공연 · 태국 PATRAVADI THEATRE · 인도네시아 Kagong Kussudiardja · 싱가포르 Esplanade 초청공연 · 호주 Fortyfivedownstairs(멜버른) / 모나쉬대학교 알렉산더극장 초청공연 · 프랑스 아비뇽페스티발 참여 · 몰도바 비테이축제 · 루마니아 시비우축제 · 멕시코 Puebla International Theatre Festival"
+                },
+                {
+                    year: "800+ 작품",
+                    event: "국내외 조명디자인 800여 작품 진행",
+                    role: "Stage Lighting Designer",
+                    description: "서울국제공연예술제(SPAF), 서울아트마켓(PAMS), 아시아아트플럭스, 충북/충남 연극제 및 전국무용제 주요 작품 조명 총괄"
+                }
+            ],
+            programs: [
+                {
+                    title: "BIGLIGHT PLOT",
+                    description: "무대조명 플롯(Plot) 및 패치표 제작을 위한 전용 유틸리티",
+                    screenshot: "assets/program1.jpg",
+                    icon: "fa-solid fa-diagram-project",
+                    url: "https://musicalroom28-ux.github.io/BIGLIGHTPLOT/",
+                    manualUrl: "https://musicalroom28-ux.github.io/biglightplotreport/"
+                },
+                {
+                    title: "BIGLIGHT DMX MASTER",
+                    description: "DMX 채널 관리 및 콘솔 프리셋 제어를 위한 전용 유틸리티",
+                    screenshot: "assets/program2.jpg",
+                    icon: "fa-solid fa-sliders",
+                    url: "http://www.biglightmaster.store/",
+                    manualUrl: "https://musicalroom28-ux.github.io/dmxmasterreport/"
+                },
+                {
+                    title: "BIGLIGHT 견적서",
+                    description: "무대조명디자인 견적서 작성을 위한 전용 유틸리티",
+                    screenshot: "assets/program3.jpg",
+                    icon: "fa-solid fa-file-invoice-dollar",
+                    url: "https://musicalroom28-ux.github.io/biglightquote/"
+                },
+                {
+                    title: "BIGLIGHT STAFF MEET",
+                    description: "무대조명 스태프 미팅 관리를 위한 전용 유틸리티",
+                    screenshot: "assets/program4.jpg",
+                    icon: "fa-solid fa-users",
+                    url: "https://musicalroom28-ux.github.io/biglightstaff/"
+                }
+            ]
+        };
+
+        async function loadJsonData(filename, fallbackData) {
+            try {
+                const response = await fetch(filename);
+                if (!response.ok) throw new Error(`File ${filename} not found`);
+                const data = await response.json();
+                return data;
+            } catch (err) {
+                console.info(`[Notice] ${filename} 파일을 찾을 수 없어 기본 모의 데이터를 로드합니다. (이유: ${err.message})`);
+                return fallbackData;
+            }
+        }
+
+        async function renderSections() {
+            // Load Works
+            const worksData = await loadJsonData('works.json', DEFAULT_DATA.works);
+            renderWorks(worksData);
+
+            // Load History
+            const historyData = await loadJsonData('history.json', DEFAULT_DATA.history);
+            renderHistory(historyData);
+
+            // Load Programs
+            const programsData = await loadJsonData('programs.json', DEFAULT_DATA.programs);
+            renderPrograms(programsData);
+        }
+
+        function renderWorks(works) {
+            const container = document.getElementById('works-grid');
+            if (!works || works.length === 0) {
+                container.innerHTML = `<p class="text-center text-slate-400 py-8">등록된 작품이 없습니다.</p>`;
+                return;
+            }
+
+            container.innerHTML = works.map(item => `
+                <div class="break-inside-avoid flex items-center gap-2 py-2 border-b border-slate-800 text-sm text-slate-300">
+                    <i class="fa-solid fa-lightbulb text-brand-500 text-[10px] shrink-0"></i>
+                    <span>${item.title}</span>
+                    ${item.youtube ? `<a href="${item.youtube}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-red-500 transition-colors shrink-0" title="유튜브에서 보기"><i class="fa-brands fa-youtube"></i></a>` : ''}
+                </div>
+            `).join('') + `
+                <div class="break-inside-avoid flex items-center gap-2 py-2 text-sm text-slate-400 italic">
+                    <i class="fa-solid fa-ellipsis text-brand-500 text-[10px] shrink-0"></i>
+                    <span>그외 다수 작품 조명디자인</span>
+                </div>
+            `;
+        }
+
+        function renderHistory(history) {
+            const container = document.getElementById('history-container');
+            if (!history || history.length === 0) {
+                container.innerHTML = `<p class="text-slate-400 py-4">등록된 이력이 없습니다.</p>`;
+                return;
+            }
+
+            container.innerHTML = history.map(item => `
+                <div class="relative pl-6 md:pl-8 group">
+                    <!-- Timeline Node -->
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-900 border-2 border-brand-500 group-hover:bg-brand-500 transition-colors"></div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-1">
+                        <span class="text-sm font-bold text-brand-500 w-16 shrink-0">${item.year}</span>
+                        <h3 class="text-base font-bold text-white">${item.event}</h3>
+                    </div>
+
+                    <div class="text-xs font-semibold text-slate-300 mb-1.5">${item.role}</div>
+                    <p class="text-sm text-slate-400 leading-relaxed">${item.description}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderPrograms(programs) {
+            const container = document.getElementById('programs-grid');
+            if (!programs || programs.length === 0) {
+                container.innerHTML = `<p class="col-span-full text-center text-slate-400 py-8">등록된 프로그램이 없습니다.</p>`;
+                return;
+            }
+
+            container.innerHTML = programs.map(prog => `
+                <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/80 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="h-10 w-10 shrink-0 rounded-xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-lg">
+                                <i class="${prog.icon || 'fa-solid fa-toolbox'}"></i>
+                            </span>
+                            <h3 class="font-bold text-white text-base">${prog.title}</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">${prog.description}</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="${prog.url || '#'}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-brand-600 text-white rounded-lg text-xs font-medium transition-colors">
+                            <i class="fa-solid fa-download text-[11px]"></i>
+                            <span>실행 / 다운로드</span>
+                        </a>
+                        ${prog.manualUrl ? `
+                        <a href="${prog.manualUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-brand-600 text-white rounded-lg text-xs font-medium transition-colors">
+                            <i class="fa-solid fa-book text-[11px]"></i>
+                            <span>사용설명서</span>
+                        </a>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Render content from JSON / Fallback
+            renderSections();
+
+            // Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Scroll Intersection Observer for Fade-in animation
+            const fadeSections = document.querySelectorAll('.fade-in-section');
+            const observerOptions = {
+                root: null,
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeSections.forEach(section => observer.observe(section));
+        });
+    </script>
+
+    <!-- Firebase (shared server storage for Notice Board) -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+    <script>
+        // TODO: Firebase 콘솔 > 프로젝트 설정 > 일반 탭에서 발급받은 값으로 교체하세요.
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const noticeDb = firebase.firestore();
+        const noticeAuth = firebase.auth();
+    </script>
+
+    <!-- Notice Board Logic -->
+    <script>
+        // Default Mock Initial Data
+        const DEFAULT_NOTICES = [
+            {
+                id: "notice-1",
+                category: "필독",
+                title: "[필독] 2026년 하반기 서비스 보안 강화 및 시스템 정기 점검 안내",
+                content: "안녕하세요. 관리자입니다.\n\n안정적인 서비스 제공과 보안 강화를 위해 아래와 같이 정기 점검을 실시합니다.\n점검 시간 동안에는 서비스 접속이 일시 중단되오니 이용에 참고하시기 바랍니다.\n\n- 일시: 2026년 8월 5일(수) 01:00 ~ 05:00 (4시간)\n- 대상: 전체 시스템 서비스\n- 내용: DB 최적화 및 보안 패치 적용\n\n감사합니다.",
+                author: "최고관리자",
+                date: "2026-07-30",
+                views: 342,
+                pinned: true,
+                status: "PUBLISHED",
+                target: "전체",
+                file: { name: "2026_보안점검_안내문.pdf", size: "1.4 MB" },
+                comments: [
+                    { id: "c1", author: "김철수", text: "점검 시간 동안 데이터 백업은 자동으로 진행되나요?", date: "2026-07-30 14:20" },
+                    { id: "c2", author: "관리자", text: "네, 점검 직전 자동 전체 백업이 수행됩니다.", date: "2026-07-30 14:35" }
+                ]
+            },
+            {
+                id: "notice-2",
+                category: "이벤트",
+                title: "[이벤트] 신규 기능 오픈 기념 이용후기 작성 이벤트 안내 🎁",
+                content: "새롭게 출시된 공지사항 게시판 시스템을 이용해주시는 모든 분들께 감사드립니다!\n\n이용 후기를 남겨주시는 분들 중 추첨을 통해 50분께 시원한 커피 쿠폰을 선물로 드립니다.\n\n- 참여 기간: 2026년 8월 1일 ~ 8월 15일\n- 당첨자 발표: 8월 20일 개별 공지\n\n많은 관심과 참여 부탁드립니다!",
+                author: "마케팅팀",
+                date: "2026-07-28",
+                views: 189,
+                pinned: false,
+                status: "PUBLISHED",
+                target: "회원 전용",
+                file: { name: "이벤트_포스터.png", size: "850 KB" },
+                comments: []
+            },
+            {
+                id: "notice-3",
+                category: "시스템",
+                title: "[시스템] 개인정보 처리방침 및 이용약관 일부 개정 사전 안내",
+                content: "개인정보보호법 개정에 따라 당사의 개인정보 처리방침이 일부 변경될 예정입니다.\n\n주요 변경 사항:\n1. 개인정보 수집 항목 및 보유 기간 명확화\n2. 제3자 제공 동의 항목 현행화\n\n자세한 사항은 첨부된 약관 개정안을 확인해 주시기 바랍니다.",
+                author: "법무팀",
+                date: "2026-07-25",
+                views: 95,
+                pinned: false,
+                status: "PUBLISHED",
+                target: "전체",
+                file: { name: "개인정보처리방침_개정안.pdf", size: "2.1 MB" },
+                comments: []
+            },
+            {
+                id: "notice-4",
+                category: "업데이트",
+                title: "[업데이트] 공지사항 작성자 리치 서식 기능 및 태그 필터링 업데이트",
+                content: "공지사항 에디터 기능이 개선되었습니다.\n\n- 굵게, 기울임, 목록, 인용문 서식 툴바 추가\n- 카테고리별 뱃지 색상 시각화\n- 카드형/목록형 보기 모드 지원\n\n더욱 편리한 관리 환경을 만들어 가겠습니다.",
+                author: "개발팀",
+                date: "2026-07-20",
+                views: 210,
+                pinned: false,
+                status: "PUBLISHED",
+                target: "임직원",
+                file: null,
+                comments: []
+            },
+            {
+                id: "notice-5",
+                category: "일반",
+                title: "[임시저장 예시] 2026년 사내 워크숍 일정 안내",
+                content: "올해 사내 워크숍 일정 초안입니다. 아직 게시되지 않은 작성 중인 게시글입니다.",
+                author: "총무팀",
+                date: "2026-07-29",
+                views: 0,
+                pinned: false,
+                status: "DRAFT",
+                target: "임직원",
+                file: null,
+                comments: []
+            }
+        ];
+
+        // Notice Board Global State
+        let notices = [];
+        let currentCategory = "전체";
+        let searchQuery = "";
+        let viewMode = "table"; // 'table' | 'grid'
+        let currentPage = 1;
+        let pageSize = 10;
+        let activeNoticeId = null;
+        let isAdminMode = false;
+        let noticesCollection = null;
+        let unsubscribeNotices = null;
+
+        // Category Config (dark theme, translucent badges)
+        const CATEGORIES = [
+            { name: "전체", bg: "bg-slate-700/60", text: "text-slate-300" },
+            { name: "필독", bg: "bg-amber-500/15", text: "text-amber-400" },
+            { name: "일반", bg: "bg-sky-500/15", text: "text-sky-400" },
+            { name: "시스템", bg: "bg-rose-500/15", text: "text-rose-400" },
+            { name: "이벤트", bg: "bg-emerald-500/15", text: "text-emerald-400" },
+            { name: "업데이트", bg: "bg-purple-500/15", text: "text-purple-400" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            noticesCollection = noticeDb.collection('notices');
+            renderNoticeCategoryTabs();
+
+            try {
+                await ensureNoticeSeedData();
+            } catch (err) {
+                console.error('[Notice] Seed check failed:', err);
+            }
+            subscribeToNotices();
+
+            noticeAuth.onAuthStateChanged(user => {
+                isAdminMode = !!user;
+                updateNoticeAdminUI();
+                renderNoticeBoard();
+            });
+        });
+
+        // One-time seed so a brand-new Firestore project isn't empty on first load
+        async function ensureNoticeSeedData() {
+            const snapshot = await noticesCollection.limit(1).get();
+            if (snapshot.empty) {
+                await replaceAllNoticesInFirestore(DEFAULT_NOTICES);
+            }
+        }
+
+        function subscribeToNotices() {
+            if (unsubscribeNotices) unsubscribeNotices();
+            unsubscribeNotices = noticesCollection.onSnapshot(snapshot => {
+                notices = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderNoticeBoard();
+                refreshOpenNoticeDetail();
+            }, err => {
+                console.error('[Notice] Firestore sync error:', err);
+                showNoticeToast("공지사항 서버 연결에 실패했습니다.", "error");
+            });
+        }
+
+        function refreshOpenNoticeDetail() {
+            if (!activeNoticeId) return;
+            const modal = document.getElementById('detailModal');
+            if (modal.classList.contains('pointer-events-none')) return;
+            const item = notices.find(n => n.id === activeNoticeId);
+            if (!item) { closeNoticeModal('detailModal'); return; }
+            document.getElementById('detailViews').innerText = item.views;
+            renderNoticeComments(item);
+        }
+
+        // Replace the entire notices collection (used by seed / import / reset)
+        async function replaceAllNoticesInFirestore(newList) {
+            const existing = await noticesCollection.get();
+            const batch = noticeDb.batch();
+            existing.docs.forEach(doc => batch.delete(doc.ref));
+            newList.forEach((n, index) => {
+                const { id, ...data } = n;
+                const docId = id || `notice_${Date.now()}_${index}`;
+                batch.set(noticesCollection.doc(docId), data);
+            });
+            await batch.commit();
+        }
+
+        // Admin Mode Toggle & Auth (Firebase Authentication)
+        function toggleNoticeAdminMode() {
+            if (isAdminMode) {
+                noticeAuth.signOut();
+                showNoticeToast("일반 사용자 모드로 전환되었습니다.");
+            } else {
+                document.getElementById('adminEmailInput').value = "";
+                document.getElementById('adminPasswordInput').value = "";
+                openNoticeModal('adminAuthModal');
+                setTimeout(() => document.getElementById('adminEmailInput').focus(), 150);
+            }
+        }
+
+        async function handleNoticeAdminAuth(e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmailInput').value.trim();
+            const pass = document.getElementById('adminPasswordInput').value;
+            try {
+                await noticeAuth.signInWithEmailAndPassword(email, pass);
+                closeNoticeModal('adminAuthModal');
+                showNoticeToast("관리자 모드로 인증되었습니다!");
+            } catch (err) {
+                showNoticeToast("이메일 또는 비밀번호가 올바르지 않습니다.", "error");
+            }
+        }
+
+        function updateNoticeAdminUI() {
+            const adminBtn = document.getElementById('adminToggleBtn');
+            const adminText = document.getElementById('adminToggleText');
+            const adminIcon = document.getElementById('adminToggleIcon');
+            const adminActions = document.getElementById('adminOnlyActions');
+            const adminDetailActions = document.getElementById('adminDetailActions');
+            const emptyStateAddBtn = document.getElementById('emptyStateAddBtn');
+
+            if (isAdminMode) {
+                adminBtn.className = "inline-flex items-center space-x-1.5 px-3 py-2 rounded-lg text-xs font-bold transition bg-emerald-600 text-white shadow-sm hover:bg-emerald-700";
+                adminText.innerText = "관리자 모드 (ON)";
+                adminIcon.className = "fa-solid fa-user-shield text-white";
+                adminActions.classList.remove('hidden');
+                adminActions.classList.add('flex');
+                if (adminDetailActions) {
+                    adminDetailActions.classList.remove('hidden');
+                    adminDetailActions.classList.add('flex');
+                }
+                if (emptyStateAddBtn) emptyStateAddBtn.classList.remove('hidden');
+            } else {
+                adminBtn.className = "inline-flex items-center space-x-1.5 px-3 py-2 rounded-lg text-xs font-bold transition border border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700";
+                adminText.innerText = "일반 사용자 모드";
+                adminIcon.className = "fa-solid fa-user-shield text-slate-400";
+                adminActions.classList.add('hidden');
+                adminActions.classList.remove('flex');
+                if (adminDetailActions) {
+                    adminDetailActions.classList.add('hidden');
+                    adminDetailActions.classList.remove('flex');
+                }
+                if (emptyStateAddBtn) emptyStateAddBtn.classList.add('hidden');
+            }
+        }
+
+        // UI Renderers
+        function updateNoticeStats() {
+            const published = notices.filter(n => n.status === 'PUBLISHED');
+            document.getElementById('statTotalNotices').innerText = published.length;
+            document.getElementById('statPinnedNotices').innerText = published.filter(n => n.pinned).length;
+            document.getElementById('statTotalViews').innerText = notices.reduce((acc, cur) => acc + (cur.views || 0), 0);
+            document.getElementById('statDraftNotices').innerText = notices.filter(n => n.status === 'DRAFT').length;
+        }
+
+        function renderNoticeCategoryTabs() {
+            const container = document.getElementById('categoryTabContainer');
+            container.innerHTML = CATEGORIES.map(cat => {
+                const isActive = currentCategory === cat.name;
+                const activeClass = isActive
+                    ? 'bg-brand-600 text-white font-semibold shadow-sm'
+                    : 'bg-slate-900/60 border border-slate-700 text-slate-400 hover:bg-slate-700 hover:text-slate-200 font-medium';
+                return `
+                    <button onclick="setNoticeCategory('${cat.name}')" class="px-3.5 py-1.5 rounded-lg text-xs transition whitespace-nowrap ${activeClass}">
+                        ${cat.name}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function getFilteredNoticeList() {
+            const statusVal = document.getElementById('statusFilter').value;
+            const sortVal = document.getElementById('sortSelect').value;
+
+            return notices.filter(item => {
+                if (currentCategory !== "전체" && item.category !== currentCategory) return false;
+                if (statusVal !== "ALL" && item.status !== statusVal) return false;
+
+                if (searchQuery.trim() !== "") {
+                    const q = searchQuery.toLowerCase();
+                    const titleMatch = item.title.toLowerCase().includes(q);
+                    const contentMatch = item.content.toLowerCase().includes(q);
+                    const authorMatch = item.author.toLowerCase().includes(q);
+                    if (!titleMatch && !contentMatch && !authorMatch) return false;
+                }
+                return true;
+            }).sort((a, b) => {
+                if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+
+                if (sortVal === "oldest") return new Date(a.date) - new Date(b.date);
+                if (sortVal === "views") return b.views - a.views;
+                if (sortVal === "comments") return (b.comments?.length || 0) - (a.comments?.length || 0);
+                return new Date(b.date) - new Date(a.date);
+            });
+        }
+
+        function renderNoticeBoard() {
+            updateNoticeStats();
+            const filtered = getFilteredNoticeList();
+
+            const totalItems = filtered.length;
+            const totalPages = Math.ceil(totalItems / pageSize) || 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = Math.min(startIndex + pageSize, totalItems);
+            const pageData = filtered.slice(startIndex, endIndex);
+
+            const emptyState = document.getElementById('emptyState');
+            const tableView = document.getElementById('tableViewContainer');
+            const gridView = document.getElementById('gridViewContainer');
+
+            if (totalItems === 0) {
+                emptyState.classList.remove('hidden');
+                tableView.classList.add('hidden');
+                gridView.classList.add('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                if (viewMode === 'table') {
+                    tableView.classList.remove('hidden');
+                    gridView.classList.add('hidden');
+                    renderNoticeTableRows(pageData, startIndex);
+                } else {
+                    tableView.classList.add('hidden');
+                    gridView.classList.remove('hidden');
+                    renderNoticeGridCards(pageData);
+                }
+            }
+
+            renderNoticePagination(totalItems, totalPages, startIndex, endIndex);
+        }
+
+        function getNoticeCategoryBadge(catName) {
+            const categoryObj = CATEGORIES.find(c => c.name === catName) || { bg: 'bg-slate-700/60', text: 'text-slate-300' };
+            return `<span class="px-2 py-0.5 rounded-full text-[11px] font-bold ${categoryObj.bg} ${categoryObj.text}">${catName}</span>`;
+        }
+
+        function renderNoticeTableRows(data, startIndex) {
+            const tbody = document.getElementById('noticeTableBody');
+            tbody.innerHTML = data.map((item, index) => {
+                const isDraft = item.status === 'DRAFT';
+                const pinnedClass = item.pinned ? 'bg-amber-500/5' : 'hover:bg-slate-700/40';
+
+                const actionButtons = isAdminMode ? `
+                    <div class="flex justify-center space-x-1 notice-no-print" onclick="event.stopPropagation()">
+                        <button onclick="prepareEditNoticeForm('${item.id}')" title="수정" class="p-1 hover:text-brand-500 text-slate-500 transition">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button onclick="confirmDeleteNoticeItem('${item.id}')" title="삭제" class="p-1 hover:text-rose-400 text-slate-500 transition">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                ` : `<span class="text-xs text-slate-600 notice-no-print">-</span>`;
+
+                return `
+                    <tr class="transition cursor-pointer ${pinnedClass}" onclick="openNoticeDetailModal('${item.id}')">
+                        <td class="py-3 px-4 text-center text-xs text-slate-500 font-mono">
+                            ${item.pinned ? '<i class="fa-solid fa-thumbtack text-amber-400"></i>' : (startIndex + index + 1)}
+                        </td>
+                        <td class="py-3 px-3">
+                            ${getNoticeCategoryBadge(item.category)}
+                        </td>
+                        <td class="py-3 px-4">
+                            <div class="flex items-center space-x-2">
+                                ${isDraft ? '<span class="px-1.5 py-0.5 text-[10px] bg-purple-500/15 text-purple-400 font-bold rounded">임시</span>' : ''}
+                                <span class="text-slate-200 font-semibold hover:text-brand-500 transition line-clamp-1">
+                                    ${escapeNoticeHtml(item.title)}
+                                </span>
+                                ${(item.comments && item.comments.length > 0) ? `<span class="text-[11px] text-brand-500 font-bold">[${item.comments.length}]</span>` : ''}
+                            </div>
+                        </td>
+                        <td class="py-3 px-3 text-xs text-slate-400">
+                            ${escapeNoticeHtml(item.author)}
+                        </td>
+                        <td class="py-3 px-3 text-center text-xs text-slate-500 font-mono">
+                            ${item.date}
+                        </td>
+                        <td class="py-3 px-3 text-center text-xs text-slate-400 font-mono">
+                            ${item.views}
+                        </td>
+                        <td class="py-3 px-3 text-center text-slate-500 text-xs">
+                            ${item.file ? '<i class="fa-solid fa-paperclip text-slate-400"></i>' : '-'}
+                        </td>
+                        <td class="py-3 px-3 text-center notice-no-print">
+                            ${actionButtons}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function renderNoticeGridCards(data) {
+            const container = document.getElementById('gridViewContainer');
+            container.innerHTML = data.map(item => {
+                const adminCardActions = isAdminMode ? `
+                    <div class="flex space-x-2 pt-2 border-t border-slate-700 justify-end" onclick="event.stopPropagation()">
+                        <button onclick="prepareEditNoticeForm('${item.id}')" class="px-2 py-1 text-[11px] font-semibold text-brand-500 hover:bg-brand-600/10 rounded transition">
+                            <i class="fa-solid fa-pen mr-1"></i>수정
+                        </button>
+                        <button onclick="confirmDeleteNoticeItem('${item.id}')" class="px-2 py-1 text-[11px] font-semibold text-rose-400 hover:bg-rose-500/10 rounded transition">
+                            <i class="fa-solid fa-trash-can mr-1"></i>삭제
+                        </button>
+                    </div>
+                ` : '';
+
+                return `
+                    <div onclick="openNoticeDetailModal('${item.id}')" class="bg-slate-800/80 rounded-xl border border-slate-700/80 p-5 hover:shadow-lg hover:border-brand-500/50 transition cursor-pointer flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                ${getNoticeCategoryBadge(item.category)}
+                                ${item.pinned ? '<span class="text-xs text-amber-400 font-bold"><i class="fa-solid fa-thumbtack mr-1"></i>필독</span>' : ''}
+                            </div>
+                            <h3 class="font-bold text-white hover:text-brand-500 transition text-sm line-clamp-2 leading-snug">
+                                ${escapeNoticeHtml(item.title)}
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                                ${escapeNoticeHtml(item.content)}
+                            </p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="pt-3 border-t border-slate-700 flex items-center justify-between text-xs text-slate-500">
+                                <span><i class="fa-solid fa-user text-slate-600 mr-1"></i>${escapeNoticeHtml(item.author)}</span>
+                                <div class="flex items-center space-x-3">
+                                    <span><i class="fa-regular fa-eye mr-1"></i>${item.views}</span>
+                                    <span><i class="fa-regular fa-comment mr-1"></i>${item.comments?.length || 0}</span>
+                                </div>
+                            </div>
+                            ${adminCardActions}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderNoticePagination(totalItems, totalPages, startIndex, endIndex) {
+            document.getElementById('totalItemsCount').innerText = totalItems;
+            document.getElementById('pageRangeText').innerText = totalItems > 0 ? `${startIndex + 1}-${endIndex}` : '0-0';
+
+            const container = document.getElementById('paginationControls');
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = `
+                <button onclick="changeNoticePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''} class="p-2 rounded-lg border border-slate-700 hover:bg-slate-700/60 text-xs text-slate-400 disabled:opacity-30 transition">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+            `;
+
+            for (let p = 1; p <= totalPages; p++) {
+                const isActive = p === currentPage;
+                html += `
+                    <button onclick="changeNoticePage(${p})" class="w-8 h-8 rounded-lg text-xs font-semibold transition ${isActive ? 'bg-brand-600 text-white shadow-sm' : 'border border-slate-700 text-slate-400 hover:bg-slate-700/60'}">
+                        ${p}
+                    </button>
+                `;
+            }
+
+            html += `
+                <button onclick="changeNoticePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''} class="p-2 rounded-lg border border-slate-700 hover:bg-slate-700/60 text-xs text-slate-400 disabled:opacity-30 transition">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Filtering & Navigation Actions
+        function setNoticeCategory(catName) {
+            currentCategory = catName;
+            currentPage = 1;
+            renderNoticeCategoryTabs();
+            renderNoticeBoard();
+        }
+
+        function setNoticeViewMode(mode) {
+            viewMode = mode;
+            document.getElementById('btnViewTable').className = mode === 'table'
+                ? 'p-2 text-brand-500 bg-brand-600/10 rounded font-medium text-xs flex items-center space-x-1'
+                : 'p-2 text-slate-500 hover:text-brand-500 rounded hover:bg-slate-700/60 font-medium text-xs flex items-center space-x-1';
+
+            document.getElementById('btnViewGrid').className = mode === 'grid'
+                ? 'p-2 text-brand-500 bg-brand-600/10 rounded font-medium text-xs flex items-center space-x-1'
+                : 'p-2 text-slate-500 hover:text-brand-500 rounded hover:bg-slate-700/60 font-medium text-xs flex items-center space-x-1';
+
+            renderNoticeBoard();
+        }
+
+        function handleNoticeSearch() {
+            const input = document.getElementById('searchInput');
+            searchQuery = input.value;
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if (searchQuery.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            currentPage = 1;
+            renderNoticeBoard();
+        }
+
+        function clearNoticeSearch() {
+            document.getElementById('searchInput').value = "";
+            searchQuery = "";
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            renderNoticeBoard();
+        }
+
+        function applyNoticeFilters() {
+            currentPage = 1;
+            renderNoticeBoard();
+        }
+
+        function changeNoticePageSize() {
+            pageSize = parseInt(document.getElementById('pageSizeSelect').value);
+            currentPage = 1;
+            renderNoticeBoard();
+        }
+
+        function changeNoticePage(page) {
+            currentPage = page;
+            renderNoticeBoard();
+        }
+
+        // Notice Detail Modal Logic
+        function openNoticeDetailModal(id) {
+            const item = notices.find(n => n.id === id);
+            if (!item) return;
+
+            activeNoticeId = id;
+
+            item.views = (item.views || 0) + 1;
+            noticesCollection.doc(id).update({ views: firebase.firestore.FieldValue.increment(1) })
+                .catch(err => console.error('[Notice] view count update failed:', err));
+
+            document.getElementById('detailTitle').innerText = item.title;
+            document.getElementById('detailAuthor').innerText = item.author;
+            document.getElementById('detailDate').innerText = item.date;
+            document.getElementById('detailViews').innerText = item.views;
+            document.getElementById('detailBody').innerText = item.content;
+            document.getElementById('detailBadgeCategory').innerText = item.category;
+            document.getElementById('detailBadgeTarget').innerText = item.target || "전체";
+
+            const pinnedBadge = document.getElementById('detailBadgePinned');
+            if (item.pinned) pinnedBadge.classList.remove('hidden');
+            else pinnedBadge.classList.add('hidden');
+
+            const attachBox = document.getElementById('detailAttachmentBox');
+            if (item.file) {
+                attachBox.classList.remove('hidden');
+                document.getElementById('detailFileName').innerText = item.file.name;
+                document.getElementById('detailFileSize').innerText = item.file.size || "";
+            } else {
+                attachBox.classList.add('hidden');
+            }
+
+            renderNoticeComments(item);
+            updateNoticePrevNextButtons();
+            openNoticeModal('detailModal');
+            renderNoticeBoard();
+        }
+
+        function renderNoticeComments(item) {
+            const commentList = document.getElementById('commentList');
+            const comments = item.comments || [];
+            document.getElementById('detailCommentCount').innerText = comments.length;
+
+            if (comments.length === 0) {
+                commentList.innerHTML = `<p class="text-xs text-slate-500 py-2 text-center">등록된 댓글이 없습니다. 첫 댓글을 작성해보세요!</p>`;
+                return;
+            }
+
+            commentList.innerHTML = comments.map(c => `
+                <div class="p-3 bg-slate-900/60 border border-slate-700 rounded-lg text-xs space-y-1">
+                    <div class="flex justify-between font-semibold text-slate-200">
+                        <span>${escapeNoticeHtml(c.author)}</span>
+                        <span class="text-[10px] text-slate-500 font-mono">${c.date}</span>
+                    </div>
+                    <p class="text-slate-400 leading-normal">${escapeNoticeHtml(c.text)}</p>
+                </div>
+            `).join('');
+        }
+
+        async function addNoticeComment() {
+            if (!activeNoticeId) return;
+            const authorInput = document.getElementById('commentAuthorInput');
+            const textInput = document.getElementById('commentTextInput');
+
+            const author = authorInput.value.trim() || "익명";
+            const text = textInput.value.trim();
+
+            if (!text) {
+                showNoticeToast("댓글 내용을 입력해주세요.", "error");
+                return;
+            }
+
+            const item = notices.find(n => n.id === activeNoticeId);
+            if (!item) return;
+
+            const now = new Date();
+            const formattedDate = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+            const newComment = { id: 'c_' + Date.now(), author, text, date: formattedDate };
+
+            try {
+                await noticesCollection.doc(activeNoticeId).update({
+                    comments: firebase.firestore.FieldValue.arrayUnion(newComment)
+                });
+                textInput.value = "";
+                if (!item.comments) item.comments = [];
+                item.comments.push(newComment);
+                renderNoticeComments(item);
+                showNoticeToast("댓글이 등록되었습니다.");
+            } catch (err) {
+                showNoticeToast("댓글 등록 중 오류가 발생했습니다.", "error");
+            }
+        }
+
+        function navigateNoticeItem(direction) {
+            const filtered = getFilteredNoticeList();
+            const currentIndex = filtered.findIndex(n => n.id === activeNoticeId);
+            if (currentIndex !== -1) {
+                const nextIndex = currentIndex + direction;
+                if (nextIndex >= 0 && nextIndex < filtered.length) {
+                    openNoticeDetailModal(filtered[nextIndex].id);
+                }
+            }
+        }
+
+        function updateNoticePrevNextButtons() {
+            const filtered = getFilteredNoticeList();
+            const currentIndex = filtered.findIndex(n => n.id === activeNoticeId);
+            document.getElementById('btnPrevNotice').disabled = currentIndex <= 0;
+            document.getElementById('btnNextNotice').disabled = currentIndex < 0 || currentIndex >= filtered.length - 1;
+        }
+
+        // Notice Editor Actions
+        function prepareNewNoticeForm() {
+            document.getElementById('editorTitle').innerText = "새 공지사항 작성";
+            document.getElementById('editNoticeId').value = "";
+            document.getElementById('noticeForm').reset();
+            document.getElementById('formAuthor').value = "관리자";
+        }
+
+        function prepareEditNoticeForm(id) {
+            if (!isAdminMode) {
+                showNoticeToast("관리자 권한이 필요합니다.", "error");
+                return;
+            }
+            const item = notices.find(n => n.id === id);
+            if (!item) return;
+
+            document.getElementById('editorTitle').innerText = "공지사항 수정";
+            document.getElementById('editNoticeId').value = item.id;
+            document.getElementById('formCategory').value = item.category;
+            document.getElementById('formTitle').value = item.title;
+            document.getElementById('formAuthor').value = item.author;
+            document.getElementById('formTarget').value = item.target || "전체";
+            document.getElementById('formPinned').checked = item.pinned;
+            document.getElementById('formBody').value = item.content;
+            document.getElementById('formFileName').value = item.file ? item.file.name : "";
+            document.getElementById('formFileSize').value = item.file ? item.file.size : "";
+
+            openNoticeModal('editorModal');
+        }
+
+        function editCurrentNoticeItem() {
+            if (!activeNoticeId) return;
+            closeNoticeModal('detailModal');
+            prepareEditNoticeForm(activeNoticeId);
+        }
+
+        function handleNoticeFormSubmit(event) {
+            event.preventDefault();
+            saveNoticeItem('PUBLISHED');
+        }
+
+        function saveNoticeDraft() {
+            saveNoticeItem('DRAFT');
+        }
+
+        async function saveNoticeItem(status) {
+            const editId = document.getElementById('editNoticeId').value;
+            const category = document.getElementById('formCategory').value;
+            const title = document.getElementById('formTitle').value.trim();
+            const author = document.getElementById('formAuthor').value.trim() || "관리자";
+            const target = document.getElementById('formTarget').value;
+            const pinned = document.getElementById('formPinned').checked;
+            const content = document.getElementById('formBody').value.trim();
+
+            const fileName = document.getElementById('formFileName').value.trim();
+            const fileSize = document.getElementById('formFileSize').value.trim();
+
+            if (!title || !content) {
+                showNoticeToast("제목과 내용을 입력해주세요.", "error");
+                return;
+            }
+
+            const now = new Date();
+            const formattedDate = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+            const fileObj = fileName ? { name: fileName, size: fileSize || '1.0 MB' } : null;
+
+            try {
+                if (editId) {
+                    const updateData = { category, title, author, target, pinned, content, status };
+                    if (fileObj) updateData.file = fileObj;
+                    await noticesCollection.doc(editId).update(updateData);
+                    showNoticeToast(status === 'DRAFT' ? "임시저장 되었습니다." : "공지사항이 수정되었습니다.");
+                } else {
+                    const newId = 'notice_' + Date.now();
+                    await noticesCollection.doc(newId).set({
+                        category,
+                        title,
+                        content,
+                        author,
+                        date: formattedDate,
+                        views: 0,
+                        pinned,
+                        status,
+                        target,
+                        file: fileObj,
+                        comments: []
+                    });
+                    showNoticeToast(status === 'DRAFT' ? "임시저장 글이 생성되었습니다." : "새 공지사항이 등록되었습니다.");
+                }
+                closeNoticeModal('editorModal');
+            } catch (err) {
+                showNoticeToast("저장 중 오류가 발생했습니다. 관리자 로그인 상태를 확인하세요.", "error");
+            }
+        }
+
+        function insertNoticeFormatting(prefix, suffix) {
+            const textarea = document.getElementById('formBody');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const text = textarea.value;
+            const selectedText = text.substring(start, end) || "텍스트";
+
+            const replacement = prefix + selectedText + suffix;
+            textarea.value = text.substring(0, start) + replacement + text.substring(end);
+            textarea.focus();
+            textarea.setSelectionRange(start + prefix.length, start + prefix.length + selectedText.length);
+        }
+
+        // Delete Logic
+        function confirmDeleteNoticeItem(id) {
+            if (!isAdminMode) {
+                showNoticeToast("관리자 권한이 필요합니다.", "error");
+                return;
+            }
+            const item = notices.find(n => n.id === id);
+            if (!item) return;
+
+            document.getElementById('confirmTitle').innerText = "공지사항 삭제";
+            document.getElementById('confirmMessage').innerText = `'${item.title}' 공지글을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.`;
+
+            const btnAction = document.getElementById('confirmBtnAction');
+            btnAction.onclick = () => {
+                deleteNoticeItem(id);
+                closeNoticeModal('confirmModal');
+            };
+
+            openNoticeModal('confirmModal');
+        }
+
+        async function deleteNoticeItem(id) {
+            try {
+                await noticesCollection.doc(id).delete();
+                showNoticeToast("공지사항이 삭제되었습니다.");
+            } catch (err) {
+                showNoticeToast("삭제 중 오류가 발생했습니다. 관리자 로그인 상태를 확인하세요.", "error");
+            }
+        }
+
+        function deleteCurrentNoticeItem() {
+            if (!activeNoticeId) return;
+            const idToDelete = activeNoticeId;
+            closeNoticeModal('detailModal');
+            confirmDeleteNoticeItem(idToDelete);
+        }
+
+        // Data Management (Export, Import, Reset)
+        function exportNoticeData() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(notices, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `공지사항_데이터_${new Date().toISOString().slice(0,10)}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            showNoticeToast("데이터 파일이 내보내기 되었습니다.");
+        }
+
+        function importNoticeData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (Array.isArray(imported)) {
+                        await replaceAllNoticesInFirestore(imported);
+                        showNoticeToast("성공적으로 데이터를 불러왔습니다.");
+                    } else {
+                        showNoticeToast("올바른 공지사항 JSON 형식이 아닙니다.", "error");
+                    }
+                } catch (err) {
+                    showNoticeToast("파일을 읽는 중 오류가 발생했습니다. 관리자 로그인 상태를 확인하세요.", "error");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function confirmResetNoticeData() {
+            document.getElementById('confirmTitle').innerText = "샘플 데이터 초기화";
+            document.getElementById('confirmMessage').innerText = "모든 게시글을 기본 샘플 데이터로 복원하시겠습니까?";
+
+            const btnAction = document.getElementById('confirmBtnAction');
+            btnAction.onclick = async () => {
+                try {
+                    await replaceAllNoticesInFirestore(DEFAULT_NOTICES);
+                    showNoticeToast("기본 샘플 데이터로 복원되었습니다.");
+                } catch (err) {
+                    showNoticeToast("초기화 중 오류가 발생했습니다. 관리자 로그인 상태를 확인하세요.", "error");
+                }
+                closeNoticeModal('confirmModal');
+            };
+
+            openNoticeModal('confirmModal');
+        }
+
+        function downloadNoticeMockFile() {
+            showNoticeToast("첨부파일 시뮬레이션 다운로드가 완료되었습니다.");
+        }
+
+        // Modal Controls & Utility Functions
+        function openNoticeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+            const card = modal.firstElementChild;
+            if (card) {
+                card.classList.remove('scale-95');
+                card.classList.add('scale-100');
+            }
+        }
+
+        function closeNoticeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+            const card = modal.firstElementChild;
+            if (card) {
+                card.classList.add('scale-95');
+                card.classList.remove('scale-100');
+            }
+        }
+
+        function showNoticeToast(message, type = "info") {
+            const container = document.getElementById('noticeToastContainer');
+            const toast = document.createElement('div');
+
+            const bgClass = type === "error" ? "bg-rose-600" : "bg-slate-800 border border-slate-700";
+            const icon = type === "error" ? "fa-circle-xmark" : "fa-circle-check";
+
+            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-xs font-medium flex items-center space-x-2 transition transform translate-y-2 opacity-0 pointer-events-auto`;
+            toast.innerHTML = `<i class="fa-solid ${icon}"></i><span>${escapeNoticeHtml(message)}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 200);
+            }, 3000);
+        }
+
+        function escapeNoticeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
