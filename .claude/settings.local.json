@@ -3,7 +3,10 @@
     "allow": [
       "Bash(node *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8791/index.html)",
-      "Bash(echo \"file:///C:/Users/USER/Desktop/home/index.html\")"
+      "Bash(echo \"file:///C:/Users/USER/Desktop/home/index.html\")",
+      "Bash(mkdir *)",
+      "Artifact",
+      "Bash(start *)"
     ]
   }
 }
