@@ -6,7 +6,13 @@
       "Bash(echo \"file:///C:/Users/USER/Desktop/home/index.html\")",
       "Bash(mkdir *)",
       "Artifact",
-      "Bash(start *)"
+      "Bash(start *)",
+      "WebSearch",
+      "Bash(python3 -)",
+      "Bash(rm -f scratch_s*.js)",
+      "Bash(cp index.html index.html.bak)",
+      "Bash(mv index_tmp2.html index.html)",
+      "Bash(rm -f index_tmp.html)"
     ]
   }
 }
