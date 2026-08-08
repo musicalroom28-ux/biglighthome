@@ -79,11 +79,11 @@
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
                 <a href="#profile" class="hover:text-brand-500 transition-colors">소개 & 경력</a>
                 <a href="#works" class="hover:text-brand-500 transition-colors">작품 목록</a>
-                <a href="#exam" class="hover:text-brand-500 transition-colors">검정시험실습</a>
                 <a href="#history" class="hover:text-brand-500 transition-colors">공연/축제 이력</a>
                 <a href="#programs" class="hover:text-brand-500 transition-colors">조명프로그램</a>
                 <a href="#estimate" class="hover:text-brand-500 transition-colors">견적 안내</a>
                 <a href="#contact" class="hover:text-brand-500 transition-colors px-3 py-1.5 rounded-full bg-brand-600 text-white hover:bg-brand-700 transition-all shadow-sm">문의하기</a>
+                <a href="#exam" class="hover:text-brand-500 transition-colors inline-flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i>검정시험실습</a>
             </nav>
 
             <div class="flex items-center gap-3">
@@ -113,11 +113,11 @@
         <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
             <a href="#profile" class="mobile-link block text-slate-300 font-medium py-2">소개</a>
             <a href="#works" class="mobile-link block text-slate-300 font-medium py-2">작품</a>
-            <a href="#exam" class="mobile-link block text-slate-300 font-medium py-2">검정시험실습</a>
             <a href="#history" class="mobile-link block text-slate-300 font-medium py-2">공연/이력</a>
             <a href="#programs" class="mobile-link block text-slate-300 font-medium py-2">조명프로그램</a>
             <a href="#estimate" class="mobile-link block text-slate-300 font-medium py-2">견적 안내</a>
             <a href="#contact" class="mobile-link block text-slate-300 font-medium py-2 text-brand-500 font-semibold">문의하기</a>
+            <a href="#exam" class="mobile-link flex items-center gap-1.5 text-slate-300 font-medium py-2"><i class="fa-solid fa-graduation-cap"></i>검정시험실습</a>
         </div>
     </header>
 
@@ -195,29 +195,6 @@
                         <p>작품 불러오는 중...</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="exam" class="fade-in-section py-20 bg-slate-900 text-white border-t border-slate-800">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-                    <div>
-                        <span class="text-brand-500 font-medium text-xs tracking-widest uppercase mb-2 block">Certification Exam Practice</span>
-                        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">검정시험실습</h2>
-                        <p class="text-slate-400 mt-2 text-sm sm:text-base">무대예술전문인 자격검정(무대조명) 시험 대비를 위한 연도별(2021~2026) 필기 카테고리 정리입니다.</p>
-                    </div>
-                </div>
-
-                <!-- Year Session Tabs -->
-                <div id="examYearTabs" class="flex flex-wrap gap-2 border-b border-slate-800 pb-5 mb-8"></div>
-
-                <!-- Year Session Panels -->
-                <div id="examYearPanels"></div>
-
-                <p class="text-xs text-slate-500 mt-8 flex items-start gap-1.5">
-                    <i class="fa-solid fa-circle-info mt-0.5"></i>
-                    <span>등급별 세부 출제기준 및 연도별 시행일정은 무대예술전문인 자격검정위원회(<a href="https://www.staff.or.kr" target="_blank" rel="noopener noreferrer" class="text-brand-500 hover:underline">staff.or.kr</a>)의 공식 공고를 기준으로 확인하시기 바랍니다.</span>
-                </p>
             </div>
         </section>
 
@@ -400,6 +377,29 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="exam" class="fade-in-section py-20 bg-slate-900 text-white border-t border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                    <div>
+                        <span class="text-brand-500 font-medium text-xs tracking-widest uppercase mb-2 block">Certification Exam Practice</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">검정시험실습</h2>
+                        <p class="text-slate-400 mt-2 text-sm sm:text-base">무대예술전문인 자격검정(무대조명) 시험 대비를 위한 연도별(2021~2026) 필기 카테고리 정리입니다.</p>
+                    </div>
+                </div>
+
+                <!-- Year Session Tabs -->
+                <div id="examYearTabs" class="flex flex-wrap gap-2 border-b border-slate-800 pb-5 mb-8"></div>
+
+                <!-- Year Session Panels -->
+                <div id="examYearPanels"></div>
+
+                <p class="text-xs text-slate-500 mt-8 flex items-start gap-1.5">
+                    <i class="fa-solid fa-circle-info mt-0.5"></i>
+                    <span>등급별 세부 출제기준 및 연도별 시행일정은 무대예술전문인 자격검정위원회(<a href="https://www.staff.or.kr" target="_blank" rel="noopener noreferrer" class="text-brand-500 hover:underline">staff.or.kr</a>)의 공식 공고를 기준으로 확인하시기 바랍니다.</span>
+                </p>
             </div>
         </section>
     </main>
