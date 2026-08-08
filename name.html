@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIGLIGHT 명함</title>
+<style>
+  :root{
+    --navy-950:#0a1122;
+    --navy-900:#0f172a;
+    --navy-800:#16223b;
+    --sky-500:#0284c7;
+    --sky-300:#38bdf8;
+    --slate-300:#cbd5e1;
+    --slate-500:#64748b;
+    --paper:#f8fafc;
+
+    --font-display: -apple-system, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    --font-body: -apple-system, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(2,132,199,0.16), transparent 60%),
+      var(--navy-950);
+    color:var(--slate-300);
+    font-family:var(--font-body);
+    padding:56px 20px 80px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:40px;
+  }
+
+  .masthead{
+    text-align:center;
+    max-width:520px;
+  }
+  .masthead .eyebrow{
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--sky-300);
+    font-weight:600;
+    margin:0 0 10px;
+  }
+  .masthead h1{
+    font-size:22px;
+    font-weight:700;
+    color:var(--paper);
+    letter-spacing:-0.01em;
+    margin:0 0 8px;
+    text-wrap:balance;
+  }
+  .masthead p{
+    font-size:13px;
+    line-height:1.6;
+    color:var(--slate-500);
+    margin:0;
+  }
+
+  /* ============ card geometry ============
+     Standard KR business card: 90mm x 50mm.
+     Cards are authored at true physical size (mm/pt)
+     and visually magnified on screen via CSS transform;
+     print mode removes the magnification. */
+  :root{ --zoom: 2.55; }
+
+  .stage{
+    display:flex;
+    gap:36px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .card-slot{
+    width:calc(90mm * var(--zoom));
+    height:calc(50mm * var(--zoom));
+    position:relative;
+    filter:drop-shadow(0 30px 50px rgba(0,0,0,0.55)) drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+  }
+
+  .card{
+    width:90mm;
+    height:50mm;
+    transform:scale(var(--zoom));
+    transform-origin:top left;
+    border-radius:2.6mm;
+    overflow:hidden;
+    position:relative;
+    background:var(--navy-900);
+  }
+
+  .card-label{
+    text-align:center;
+    font-size:10px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--slate-500);
+    margin-top:14px;
+  }
+
+  /* ---------- FRONT ---------- */
+  .card.front{
+    background:
+      radial-gradient(ellipse 70mm 60mm at 78% -8%, rgba(56,189,248,0.35), transparent 60%),
+      radial-gradient(ellipse 50mm 40mm at 78% -8%, rgba(2,132,199,0.55), transparent 55%),
+      linear-gradient(160deg, var(--navy-900) 0%, var(--navy-950) 78%);
+  }
+  /* barn-door corner frame, referencing the lighting fixture that shapes a beam */
+  .card.front::before{
+    content:"";
+    position:absolute;
+    inset:3.2mm;
+    border-top:0.35mm solid rgba(56,189,248,0.55);
+    border-left:0.35mm solid rgba(56,189,248,0.55);
+    width:6mm; height:6mm;
+    pointer-events:none;
+  }
+  .card.front::after{
+    content:"";
+    position:absolute;
+    right:3.2mm; bottom:3.2mm;
+    border-bottom:0.35mm solid rgba(56,189,248,0.55);
+    border-right:0.35mm solid rgba(56,189,248,0.55);
+    width:6mm; height:6mm;
+    pointer-events:none;
+  }
+
+  .front-inner{
+    position:relative;
+    z-index:2;
+    height:100%;
+    padding:6.5mm 7mm;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+  }
+
+  .wordmark{
+    font-size:9.6mm;
+    font-weight:800;
+    letter-spacing:-0.02em;
+    color:var(--paper);
+    line-height:1;
+    margin:0 0 3mm;
+  }
+  .wordmark .dot{ color:var(--sky-300); }
+
+  .front-role-en{
+    font-size:2.6mm;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--sky-300);
+    margin:0 0 1.6mm;
+  }
+  .front-role-kr{
+    font-size:3.1mm;
+    font-weight:500;
+    color:var(--slate-300);
+    margin:0;
+  }
+
+  /* ---------- BACK ---------- */
+  .card.back{
+    background:linear-gradient(155deg, var(--navy-900) 0%, var(--navy-950) 85%);
+    padding:6mm 7mm 6mm 9mm;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+
+  /* DMX-console fader ticks along the spine, echoing BIGLIGHT DMX MASTER */
+  .dmx-rail{
+    position:absolute;
+    left:2.6mm; top:5mm; bottom:5mm;
+    width:1.6mm;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .dmx-rail span{
+    display:block;
+    height:0.28mm;
+    background:rgba(148,163,184,0.35);
+  }
+  .dmx-rail span:nth-child(4n+1){
+    background:var(--sky-500);
+    width:150%;
+  }
+
+  .back-top{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    padding-bottom:2.6mm;
+    border-bottom:0.2mm solid rgba(148,163,184,0.22);
+  }
+  .back-brand{
+    font-size:3.4mm;
+    font-weight:800;
+    color:var(--paper);
+    letter-spacing:-0.01em;
+  }
+  .back-brand .dot{ color:var(--sky-300); }
+  .back-tag{
+    font-size:2.15mm;
+    color:var(--slate-500);
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+
+  .contact-grid{
+    display:grid;
+    grid-template-columns:16mm 1fr;
+    row-gap:2.3mm;
+    column-gap:2.5mm;
+    padding:3.4mm 0;
+  }
+  .contact-grid dt{
+    font-size:2.1mm;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--slate-500);
+    font-weight:600;
+    margin:0;
+  }
+  .contact-grid dd{
+    font-size:2.85mm;
+    color:var(--paper);
+    font-weight:500;
+    margin:0;
+    font-variant-numeric:tabular-nums;
+  }
+  .contact-grid dd.muted{
+    color:var(--slate-300);
+    font-weight:400;
+  }
+
+  .back-foot{
+    font-size:1.95mm;
+    color:var(--slate-500);
+    line-height:1.5;
+    border-top:0.2mm solid rgba(148,163,184,0.22);
+    padding-top:2.2mm;
+  }
+  .back-foot b{ color:var(--sky-300); font-weight:600; }
+
+  /* ============ print ============ */
+  @media print{
+    body{
+      background:#fff;
+      padding:0;
+      gap:0;
+    }
+    .masthead, .card-label{ display:none; }
+    .stage{ gap:6mm; }
+    :root{ --zoom:1; }
+    .card-slot{
+      filter:none;
+      outline:0.2mm dashed #94a3b8;
+      outline-offset:2mm;
+    }
+    @page{ size:auto; margin:10mm; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <p class="eyebrow">Business Card &middot; 90&nbsp;&times;&nbsp;50mm</p>
+  <h1>BIGLIGHT — 무대조명디자이너 &amp; 기술감독</h1>
+  <p>홈페이지의 다크 네이비 &amp; 스카이블루 아이덴티티를 그대로 이어, 앞면은 스포트라이트 한 줄기가 떨어지는 무대를, 뒷면은 DMX 콘솔의 채널 페이더를 모티브로 구성했습니다. 인쇄 시 실제 크기(90×50mm)로 출력됩니다.</p>
+</div>
+
+<div class="stage">
+  <div>
+    <div class="card-slot">
+      <div class="card front">
+        <div class="front-inner">
+          <div class="wordmark">BIGLIGHT<span class="dot">.</span></div>
+          <p class="front-role-en">Stage Lighting Design &amp; Technical Director</p>
+          <p class="front-role-kr">무대조명디자이너 · 기술감독</p>
+        </div>
+      </div>
+    </div>
+    <p class="card-label">Front</p>
+  </div>
+
+  <div>
+    <div class="card-slot">
+      <div class="card back">
+        <div class="dmx-rail" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span>
+        </div>
+
+        <div class="back-top">
+          <span class="back-brand">BIGLIGHT<span class="dot">.</span></span>
+          <span class="back-tag">Since Cheongju Univ.</span>
+        </div>
+
+        <dl class="contact-grid">
+          <dt>Email</dt>
+          <dd>musicalroom@kakao.com</dd>
+          <dt>Mobile</dt>
+          <dd>010&#8209;2198&#8209;4854</dd>
+          <dt>Field</dt>
+          <dd class="muted">무대조명디자인 · 무대기술감독</dd>
+          <dt>YouTube</dt>
+          <dd class="muted">@visualguy5675</dd>
+        </dl>
+
+        <p class="back-foot"><b>800+</b> Productions &middot; 국립아시아문화전당 · 서울문화재단 · 성북문화재단 · 극단 노뜰</p>
+      </div>
+    </div>
+    <p class="card-label">Back</p>
+  </div>
+</div>
+
+</body>
+</html>
