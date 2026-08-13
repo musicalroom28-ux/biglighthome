@@ -335,10 +335,10 @@
         </section>
 
         <section id="contact" class="fade-in-section py-20 bg-slate-900 text-white border-t border-slate-800">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-xl mx-auto mb-12">
                     <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">공연 문의하기</h2>
-                    <p class="text-slate-400 mt-2 text-sm sm:text-base">공연 조명 디자인 의뢰 및 기술감독 관련 문의는 이메일로 연락주세요.</p>
+                    <p class="text-slate-400 mt-2 text-sm sm:text-base">외부 공연단체의 조명 디자인 의뢰 및 기술감독 관련 문의는 아래 폼 또는 이메일로 연락주세요.</p>
                     <div class="flex items-center justify-center space-x-4 mt-4">
                         <a href="mailto:musicalroom@kakao.com" id="email-contact-link-contact" class="h-11 w-11 sm:h-10 sm:w-10 px-0 rounded-full bg-slate-800 border border-slate-700 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-300 transition-all duration-300" title="이메일 문의" onclick="event.preventDefault(); this.classList.remove('w-11','sm:w-10','rounded-full','px-0'); this.classList.add('px-4','rounded-lg'); this.innerHTML='<span class=\'text-sm font-medium whitespace-nowrap\'>musicalroom@kakao.com</span>';">
                             <i class="fa-regular fa-envelope text-lg"></i>
@@ -349,9 +349,65 @@
                     </div>
                 </div>
 
-                <div class="max-w-md mx-auto">
+                <div class="grid md:grid-cols-5 gap-6 items-start">
+                    <!-- Inquiry Form (Formspree) -->
+                    <div class="md:col-span-3 bg-slate-800/80 p-6 sm:p-8 rounded-2xl border border-slate-700/80">
+                        <h3 class="font-bold text-white mb-1">공연단체 문의 폼</h3>
+                        <p class="text-xs text-slate-400 mb-6">아래 내용을 남겨주시면 확인 후 순차적으로 답변드립니다.</p>
+
+                        <form id="contact-form" action="https://formspree.io/f/mdendaoa" method="POST" class="space-y-4">
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="cf-org" class="block text-xs font-medium text-slate-400 mb-1.5">단체명 / 성함 <span class="text-brand-500">*</span></label>
+                                    <input type="text" id="cf-org" name="단체명/성함" required
+                                        class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
+                                        placeholder="예) OO공연예술단체 / 홍길동">
+                                </div>
+                                <div>
+                                    <label for="cf-phone" class="block text-xs font-medium text-slate-400 mb-1.5">연락처</label>
+                                    <input type="tel" id="cf-phone" name="연락처"
+                                        class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
+                                        placeholder="010-0000-0000">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="cf-email" class="block text-xs font-medium text-slate-400 mb-1.5">이메일 <span class="text-brand-500">*</span></label>
+                                <input type="email" id="cf-email" name="이메일" required
+                                    class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
+                                    placeholder="contact@example.com">
+                            </div>
+
+                            <div>
+                                <label for="cf-subject" class="block text-xs font-medium text-slate-400 mb-1.5">공연명 / 제목</label>
+                                <input type="text" id="cf-subject" name="공연명/제목"
+                                    class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
+                                    placeholder="예) 202X년 OO페스티벌 조명 디자인 의뢰">
+
+                            </div>
+
+                            <div>
+                                <label for="cf-message" class="block text-xs font-medium text-slate-400 mb-1.5">문의 내용 <span class="text-brand-500">*</span></label>
+                                <textarea id="cf-message" name="문의내용" rows="5" required
+                                    class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent resize-none"
+                                    placeholder="공연 일정, 장소, 예산 규모, 필요한 작업 범위 등을 자유롭게 작성해 주세요."></textarea>
+                            </div>
+
+                            <!-- Honeypot (스팸 방지, 사용자에게는 보이지 않음) -->
+                            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+                            <button type="submit" id="cf-submit-btn"
+                                class="w-full inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-medium text-sm py-3 rounded-lg transition-colors">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>문의 보내기</span>
+                            </button>
+
+                            <p id="cf-status" class="text-sm text-center hidden" role="status"></p>
+                        </form>
+                    </div>
+
                     <!-- Direct Info -->
-                    <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/80 flex flex-col justify-between">
+                    <div class="md:col-span-2 bg-slate-800/80 p-6 rounded-2xl border border-slate-700/80 flex flex-col justify-between">
                         <div>
                             <h3 class="font-bold text-white mb-4">Direct Contact</h3>
                             <div class="space-y-4 text-sm text-slate-300">
@@ -378,28 +434,6 @@
             </div>
         </section>
 
-        <section id="exam" class="fade-in-section py-20 bg-slate-900 text-white border-t border-slate-800">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-                    <div>
-                        <span class="text-brand-500 font-medium text-xs tracking-widest uppercase mb-2 block">Certification Exam Practice</span>
-                        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">검정시험실습</h2>
-                        <p class="text-slate-400 mt-2 text-sm sm:text-base">무대예술전문인 자격검정(무대조명) 시험 대비를 위한 연도별(2021~2026) 필기 카테고리 정리입니다.</p>
-                    </div>
-                </div>
-
-                <!-- Year Session Tabs -->
-                <div id="examYearTabs" class="flex flex-wrap gap-2 border-b border-slate-800 pb-5 mb-8"></div>
-
-                <!-- Year Session Panels -->
-                <div id="examYearPanels"></div>
-
-                <p class="text-xs text-slate-500 mt-8 flex items-start gap-1.5">
-                    <i class="fa-solid fa-circle-info mt-0.5"></i>
-                    <span>등급별 세부 출제기준 및 연도별 시행일정은 무대예술전문인 자격검정위원회(<a href="https://www.staff.or.kr" target="_blank" rel="noopener noreferrer" class="text-brand-500 hover:underline">staff.or.kr</a>)의 공식 공고를 기준으로 확인하시기 바랍니다.</span>
-                </p>
-            </div>
-        </section>
     </main>
 
     <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs">
@@ -751,105 +785,55 @@
         });
     </script>
 
-    <!-- Certification Exam Practice (검정시험실습) Logic -->
+    <!-- Contact Form (Formspree) Submit Handler -->
     <script>
-        // 무대예술전문인 자격검정(무대조명) 연도별 실습 세션
-        const EXAM_YEARS = [2026, 2025, 2024, 2023, 2022, 2021];
+        (function () {
+            const form = document.getElementById('contact-form');
+            if (!form) return;
 
-        const EXAM_GRADES = [
-            {
-                grade: "3급",
-                written: { common: ["공연장 안전 및 관련 법규", "무대기술 일반"], major: ["무대조명 Ⅰ"] },
-                practical: ["조명기구 결선 및 배선 실무", "회로 설계 및 조도 측정", "무대조명 도면(Plot) 작성 기초"]
-            },
-            {
-                grade: "2급",
-                written: { common: ["공연장 안전 및 관련 법규", "무대기술 일반"], major: ["무대조명 Ⅱ"] },
-                practical: ["조명 큐시트 작성 및 프로그래밍", "조명 디자인 기획안 실습", "DMX 콘솔 운용 실무"]
-            },
-            {
-                grade: "1급",
-                written: { common: ["공연장 안전 및 관련 법규", "무대기술 일반"], major: ["무대조명 Ⅲ"] },
-                practical: ["종합 무대조명 디자인 실무", "기술감독 및 현장 안전관리", "대형 공연 조명 시스템 설계"]
+            const submitBtn = document.getElementById('cf-submit-btn');
+            const statusEl = document.getElementById('cf-status');
+
+            function showStatus(message, isError) {
+                statusEl.textContent = message;
+                statusEl.classList.remove('hidden', 'text-emerald-400', 'text-red-400');
+                statusEl.classList.add(isError ? 'text-red-400' : 'text-emerald-400');
             }
-        ];
 
-        // 연도별 세션에 연결할 외부 실습 사이트 (모든 연도 동일 주소)
-        const EXAM_YEAR_LINKS = Object.fromEntries(
-            EXAM_YEARS.map(year => [year, "https://musicalroom28-ux.github.io/2026-test/"])
-        );
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-        let activeExamYear = EXAM_YEARS[0];
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-60', 'cursor-not-allowed');
+                const originalBtnHtml = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>전송 중...</span>';
 
-        function renderExamYearTabs() {
-            const container = document.getElementById('examYearTabs');
-            if (!container) return;
-            container.innerHTML = EXAM_YEARS.map(year => {
-                const activeClass = year === activeExamYear ? 'bg-brand-600 border-brand-600 text-white' : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700';
-                const link = EXAM_YEAR_LINKS[year];
-                if (link) {
-                    return `
-                        <a href="${link}" target="_blank" rel="noopener noreferrer" onclick="setActiveExamYear(${year})"
-                           class="px-4 py-2 rounded-lg text-sm font-bold transition border inline-flex items-center gap-1.5 ${activeClass}">
-                            ${year}년<i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </a>
-                    `;
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        showStatus('문의가 정상적으로 접수되었습니다. 빠른 시일 내에 답변드리겠습니다.', false);
+                        form.reset();
+                    } else {
+                        const data = await response.json().catch(() => null);
+                        const errMsg = data && data.errors && data.errors.length
+                            ? data.errors.map(err => err.message).join(', ')
+                            : '전송에 실패했습니다. 잠시 후 다시 시도하시거나 이메일로 문의해 주세요.';
+                        showStatus(errMsg, true);
+                    }
+                } catch (err) {
+                    showStatus('네트워크 오류로 전송에 실패했습니다. 잠시 후 다시 시도하시거나 이메일로 문의해 주세요.', true);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+                    submitBtn.innerHTML = originalBtnHtml;
                 }
-                return `
-                    <button onclick="setActiveExamYear(${year})"
-                            class="px-4 py-2 rounded-lg text-sm font-bold transition border ${activeClass}">
-                        ${year}년
-                    </button>
-                `;
-            }).join('');
-        }
-
-        function renderExamYearPanel() {
-            const container = document.getElementById('examYearPanels');
-            if (!container) return;
-
-            container.innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
-                    ${EXAM_GRADES.map(g => `
-                        <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700/80">
-                            <div class="flex items-center gap-2 mb-3">
-                                <span class="h-8 w-8 rounded-lg bg-brand-600/20 text-brand-500 flex items-center justify-center text-xs font-bold">${g.grade}</span>
-                                <h3 class="font-bold text-white text-sm">무대조명 ${g.grade}</h3>
-                            </div>
-                            <div class="mb-3">
-                                <p class="text-[11px] font-semibold uppercase text-slate-500 mb-1.5">필기 - 공통과목</p>
-                                <ul class="space-y-1 text-xs text-slate-300">
-                                    ${g.written.common.map(item => `<li class="flex items-center gap-1.5"><i class="fa-solid fa-check text-brand-500 text-[10px]"></i>${item}</li>`).join('')}
-                                </ul>
-                            </div>
-                            <div class="mb-3">
-                                <p class="text-[11px] font-semibold uppercase text-slate-500 mb-1.5">필기 - 전공과목</p>
-                                <ul class="space-y-1 text-xs text-slate-300">
-                                    ${g.written.major.map(item => `<li class="flex items-center gap-1.5"><i class="fa-solid fa-check text-brand-500 text-[10px]"></i>${item}</li>`).join('')}
-                                </ul>
-                            </div>
-                            <div>
-                                <p class="text-[11px] font-semibold uppercase text-slate-500 mb-1.5">실기 종목</p>
-                                <ul class="space-y-1 text-xs text-slate-300">
-                                    ${g.practical.map(item => `<li class="flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400 text-[10px]"></i>${item}</li>`).join('')}
-                                </ul>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        }
-
-        function setActiveExamYear(year) {
-            activeExamYear = year;
-            renderExamYearTabs();
-            renderExamYearPanel();
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderExamYearTabs();
-            renderExamYearPanel();
-        });
+            });
+        })();
     </script>
 </body>
 </html>
