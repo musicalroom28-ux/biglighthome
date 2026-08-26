@@ -866,7 +866,7 @@
                 '1gqsNacsz58'
             ];
 
-            let reelIndex = 0;
+            let reelIndex = Math.floor(Math.random() * PROFILE_REEL_VIDEO_IDS.length);
             let reelPlayer = null;
 
             // Load the YouTube IFrame API script
@@ -874,8 +874,19 @@
             ytApiTag.src = 'https://www.youtube.com/iframe_api';
             document.head.appendChild(ytApiTag);
 
-            function playNextReelVideo() {
-                reelIndex = (reelIndex + 1) % PROFILE_REEL_VIDEO_IDS.length;
+            // Picks a random video index, avoiding an immediate repeat of the current one
+            // (when there's more than one video to choose from).
+            function pickRandomReelIndex() {
+                if (PROFILE_REEL_VIDEO_IDS.length <= 1) return reelIndex;
+                let nextIndex;
+                do {
+                    nextIndex = Math.floor(Math.random() * PROFILE_REEL_VIDEO_IDS.length);
+                } while (nextIndex === reelIndex);
+                return nextIndex;
+            }
+
+            function playRandomReelVideo() {
+                reelIndex = pickRandomReelIndex();
                 reelPlayer.loadVideoById(PROFILE_REEL_VIDEO_IDS[reelIndex]);
             }
 
@@ -909,12 +920,12 @@
                             // Only auto-advance when a video finishes naturally.
                             // A visitor-initiated pause (event.data === YT.PlayerState.PAUSED) is left alone.
                             if (event.data === YT.PlayerState.ENDED) {
-                                playNextReelVideo();
+                                playRandomReelVideo();
                             }
                         },
                         onError: function () {
-                            // Skip any video that fails (removed/private) and keep the reel going
-                            playNextReelVideo();
+                            // Skip any video that fails (removed/private) and keep the reel going, picking another at random
+                            playRandomReelVideo();
                         }
                     }
                 });
