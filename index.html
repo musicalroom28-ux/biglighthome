@@ -856,14 +856,23 @@
     <!-- Profile Photo Video Reel: continuously plays BIGLIGHT DESIGN AI YouTube videos (https://musicalroom28-ux.github.io/moving/) inside the profile photo box -->
     <script>
         (function () {
-            // Video IDs sourced from https://musicalroom28-ux.github.io/moving/ (BIGLIGHT DESIGN AI)
+            // Video IDs sourced from https://musicalroom28-ux.github.io/moving/ — limited to the
+            // "BIGLIGHTT DESIGN AI", "극단 노뜰", and 노들인디션 (인디밴드 까치산 / 인디밴드 크리스피 / 극동아시아타이거즈) categories only.
             const PROFILE_REEL_VIDEO_IDS = [
-                'QBi1LRHBlWI', '7kGmaG_Szlw', 'nXL1owfD6lY', 'Gun4N7erWEk', 'faimq232YIM',
+                // BIGLIGHTT DESIGN AI
+                '3N2OoQw9ORo', 'QBi1LRHBlWI', '7kGmaG_Szlw', 'nXL1owfD6lY', 'Gun4N7erWEk', 'faimq232YIM',
                 '93rgK3twtT4', 'FmV4CAcgxXg', 'ZxnwkMfwbHs', 'xviAi22tJJY', 'GUx2woZ7IVE',
-                'ZwJMtprUFl0', 'EyJbf3ROGMc', '1_VWoaPoz1s', '8hd7CPyUxco', 'QNaEmROVZG8',
-                'HyJRLioYs_Y', 'kmwQub8FDlU', 'W4e5F2O2Hiw', 'R5oZhMiuis8', 'HbUWdkjgH4Y',
-                'xngGFucd_XE', 'UJbdWrGYa8Y', 'AYHoe3bLS3c', 'E4Sis5KtryE', 'ppCC3v5Uh1w',
-                '1gqsNacsz58'
+                'ZwJMtprUFl0', 'EyJbf3ROGMc', '1_VWoaPoz1s', '8hd7CPyUxco', 'HyJRLioYs_Y',
+                'kmwQub8FDlU', 'W4e5F2O2Hiw',
+                // 극단 노뜰
+                'R5oZhMiuis8', 'HbUWdkjgH4Y', 'xngGFucd_XE', 'UJbdWrGYa8Y', 'AYHoe3bLS3c',
+                'E4Sis5KtryE', 'ppCC3v5Uh1w',
+                // 노들인디션 - 인디밴드 까치산
+                '86jvbvHC4Z4', 'CYpCE1ezoC4', '1NfqstcCfKA', '0x78K8cfcs8', 'on6IxMdR6pc',
+                // 노들인디션 - 인디밴드 크리스피
+                '2FhLVM7Ejvc', 'BFgqLEcIOQU', 'nkRDm1foXgU', 'JjusIkn9FbA', 'g_KwSM2gj3Q',
+                // 노들인디션 - 극동아시아타이거즈
+                'c7A7tWn1hbs', 'D3uwsgBn6eI', 'BQ-C6kY99Y8', 'ggk1CLG4xJY', 'mmKm0UgY_eM'
             ];
 
             let reelIndex = Math.floor(Math.random() * PROFILE_REEL_VIDEO_IDS.length);
