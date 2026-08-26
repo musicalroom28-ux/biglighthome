@@ -875,7 +875,7 @@
                 'c7A7tWn1hbs', 'D3uwsgBn6eI', 'BQ-C6kY99Y8', 'ggk1CLG4xJY', 'mmKm0UgY_eM'
             ];
 
-            let reelIndex = Math.floor(Math.random() * PROFILE_REEL_VIDEO_IDS.length);
+            let reelIndex = 0;
             let reelPlayer = null;
 
             // Load the YouTube IFrame API script
@@ -883,19 +883,10 @@
             ytApiTag.src = 'https://www.youtube.com/iframe_api';
             document.head.appendChild(ytApiTag);
 
-            // Picks a random video index, avoiding an immediate repeat of the current one
-            // (when there's more than one video to choose from).
-            function pickRandomReelIndex() {
-                if (PROFILE_REEL_VIDEO_IDS.length <= 1) return reelIndex;
-                let nextIndex;
-                do {
-                    nextIndex = Math.floor(Math.random() * PROFILE_REEL_VIDEO_IDS.length);
-                } while (nextIndex === reelIndex);
-                return nextIndex;
-            }
-
-            function playRandomReelVideo() {
-                reelIndex = pickRandomReelIndex();
+            // Plays through the list in order from the start, looping back to the
+            // first video once the last one finishes.
+            function playNextReelVideo() {
+                reelIndex = (reelIndex + 1) % PROFILE_REEL_VIDEO_IDS.length;
                 reelPlayer.loadVideoById(PROFILE_REEL_VIDEO_IDS[reelIndex]);
             }
 
@@ -929,12 +920,12 @@
                             // Only auto-advance when a video finishes naturally.
                             // A visitor-initiated pause (event.data === YT.PlayerState.PAUSED) is left alone.
                             if (event.data === YT.PlayerState.ENDED) {
-                                playRandomReelVideo();
+                                playNextReelVideo();
                             }
                         },
                         onError: function () {
-                            // Skip any video that fails (removed/private) and keep the reel going, picking another at random
-                            playRandomReelVideo();
+                            // Skip any video that fails (removed/private) and keep the reel going
+                            playNextReelVideo();
                         }
                     }
                 });
