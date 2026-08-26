@@ -65,7 +65,10 @@
             -webkit-backdrop-filter: blur(12px);
         }
 
-        /* Profile reel: make the YouTube iframe fill/cover the square photo box */
+        /* Profile reel: make the YouTube iframe fill/cover the photo box.
+           (The YouTube IFrame API replaces the mount <div> with an <iframe> that
+           keeps the same id, so both selectors are covered here.) */
+        #profile-video-player,
         #profile-video-player iframe {
             width: 100%;
             height: 100%;
@@ -173,8 +176,9 @@
                              onerror="this.onerror=null; this.src='https://placehold.co/500x500/0f172a/f8fafc?text=BIGLIGHT+Design';"
                              alt="BIGLIGHT 조명디자이너"
                              class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500">
-                        <!-- Continuously-playing YouTube reel (muted autoplay, cycles through BIGLIGHT DESIGN AI videos) -->
-                        <div id="profile-video-player" class="absolute inset-0 w-full h-full z-10 pointer-events-none"></div>
+                        <!-- Continuously-playing YouTube reel (starts muted for autoplay, cycles through BIGLIGHT DESIGN AI videos).
+                             Native controls are enabled so visitors can unmute for sound and pause/play. -->
+                        <div id="profile-video-player" class="absolute inset-0 w-full h-full z-10"></div>
                     </div>
                 </div>
             </div>
@@ -884,10 +888,10 @@
                     videoId: PROFILE_REEL_VIDEO_IDS[reelIndex],
                     playerVars: {
                         autoplay: 1,
-                        mute: 1,
-                        controls: 0,
-                        disablekb: 1,
-                        fs: 0,
+                        mute: 1,          // must start muted so browsers allow autoplay
+                        controls: 1,      // show native play/pause + volume controls
+                        disablekb: 0,
+                        fs: 1,
                         iv_load_policy: 3,
                         modestbranding: 1,
                         playsinline: 1,
@@ -902,6 +906,8 @@
                             if (img) img.style.opacity = '0';
                         },
                         onStateChange: function (event) {
+                            // Only auto-advance when a video finishes naturally.
+                            // A visitor-initiated pause (event.data === YT.PlayerState.PAUSED) is left alone.
                             if (event.data === YT.PlayerState.ENDED) {
                                 playNextReelVideo();
                             }
